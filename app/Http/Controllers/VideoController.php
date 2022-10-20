@@ -227,6 +227,7 @@ class VideoController extends Controller
                 'trailer_file' => $fullPathTrailer,
                 'thumbnail_file' => $fullPathThumbnail,
                 'tag_id' => $request->tag_id,
+
             ]);
 
             if(!$videoUpdated){
