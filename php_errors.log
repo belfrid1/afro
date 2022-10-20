@@ -1,0 +1,2 @@
+[20-Oct-2022 15:25:40 UTC] PHP Warning:  require(/var/www/html/afro/vendor/autoload.php): failed to open stream: No such file or directory in /var/www/html/afro/artisan on line 18
+[20-Oct-2022 15:25:40 UTC] PHP Fatal error:  require(): Failed opening required '/var/www/html/afro/vendor/autoload.php' (include_path='.:/usr/share/pear:/usr/share/php') in /var/www/html/afro/artisan on line 18

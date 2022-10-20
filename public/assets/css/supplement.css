@@ -1,0 +1,489 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+.GetACont{
+    font-family: 'Roboto', sans-serif;
+    width: 600px;
+    height: 550px;
+    background-color: #f9f9f9;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    color: #000;
+}
+.GetACont h2{
+    text-transform: uppercase;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 24px;
+    font-weight: 800;
+}
+.GetACont h2 span{
+    color: #21619f;
+}
+.GetACont h3{
+    text-transform: uppercase;
+    color: #21619f;
+    font-weight: 500;
+}
+.strike{
+    display: inline-block;
+    font-size: 21px;
+    color: #9c9c9c;
+    font-weight: 300;
+}
+.strike .amount sup{
+    font-size: 11px;
+}
+.GATitle{
+    width: 100%;
+    text-align: center;
+    height: 6%;
+}
+.errorWin{
+    height: 15px;
+    width: 100%;
+    color: red;
+    position: absolute;
+    bottom: 0px;
+    font-size: 12px;
+}
+.GACreate{
+    width: 44%;
+    text-align: left;
+    height: 34%;
+    position: relative;
+}
+.GACreate h3{
+    margin: 0px;
+    width: 100%;
+    font-size: 18px;
+}
+.GACreate input[type="text"],
+.GACreate input[type="email"],
+.GACreate input[type="password"]{
+    width: 70%;
+    height: 33px;
+    margin-top: 13px;
+    background-color: #eeeeee;
+    box-shadow: none;
+    border: 1px solid #d8d8d8;
+    padding: 3px;
+    float: left;
+    outline: none;
+    font-size: 14px;
+    color: #5c5c5c;
+}
+.GACreate input[type="text"]:focus,
+.GACreate input[type="email"]:focus,
+.GACreate input[type="password"]:focus{
+    box-shadow: 0 0 3px #afafaf;
+}
+.GetACont input[type=radio]{
+    margin-top: 12px;
+    display: inline-block;
+    border-radius: 100%;
+    height: 18px;
+    width: 18px;
+}
+.GACreate .befInput{
+    float: left;
+    width: 15%;
+    margin-top: 13px;
+    height: 33px;
+    border: 1px solid #d8d8d8;
+    border-right: 0px solid;
+    clear: both;
+    background-color: #eeeeee;
+}
+.GACreate input[type="text"],
+.GACreate input[type="email"],
+.GACreate input[type="password"]{
+    padding-left: 10px;
+    font-size: 15px;
+}
+.GAPay{
+    width: 56%;
+    text-align: left;
+    height: 34%;
+}
+input[type="radio"]{
+    cursor: pointer;
+}
+.GAPay span{
+    font-size: 14px;
+    vertical-align: 4px;
+    padding-left: 5px;
+}
+.GAPay span:hover{
+    cursor: pointer;
+}
+.GAPay h3{
+    margin: 0px;
+    font-size: 18px;
+}
+.GAPay .singlePay{
+    width: 100%;
+    margin-top: 15px;
+}
+
+.GAMember{
+    width: 100%;
+    height: 36%;
+    text-align: left;
+}
+.GAMember h3{
+    margin: 0px;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.singleType{
+    background-color: #eeeeee;
+    border: 1px solid #d8d8d8;
+    display: flex;
+    height: 52px;
+    padding-top: 5px;
+    margin-top: 5px;
+    transition: all .1s;
+}
+.singleType:hover{
+    cursor: pointer;
+    border: 1px solid #c4c4c4;
+}
+.singleType input{
+    width: 10%;
+    margin: 13px 20px;
+}
+.singleType .titleCont{
+    width: 65%;
+}
+.singleType .titleCont p{
+    margin: 0px;
+    font-size: 13px;
+    padding-left: 3px;
+    line-height: 4px;
+}
+.singleType .title{
+    font-size: 20px;
+    font-weight: 600;
+}
+.singleType .amount{
+    font-size: 25px;
+    position: relative;
+    /*text-align: right;*/
+    padding-right: 25px;
+    width: 45%;
+    padding-top: 3px;
+}
+.singleType .amount sup{
+    font-size: 18px;
+    /*vertical-align: top;*/
+}
+.singleType .amount .mth{
+    font-size: 11px;
+    position: absolute;
+    right: 25px;
+    bottom: 7px;
+}
+.singleType .amount .mth.day{
+    right: 23px;
+}
+.GASubmit{
+    width: 100%;
+    height: 14%;
+    text-align: center;
+    margin-top: 5px;
+}
+.btnGA{
+    background-color: #85a947;
+    width: 50%;
+    height: 70%;
+    color: white;
+    font-size: 23px;
+    font-weight: 600;
+    outline: none;
+    padding: 0px;
+    border: 0px solid red;
+    text-align: center;
+}
+.btnGA:hover{
+    background-color: #8bb14d;
+    box-shadow: 0 0 15px #c7c7c7;
+    cursor: pointer;
+}
+.btnGA span{
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 50px;
+    text-shadow: 1px 1px 1px #000000;
+}
+.btnGAIcon{
+    width: 20%;
+    background-color: #6f8a3b;
+    height: 100%;
+    display: inline-block;
+    float: left;
+}
+.GASubmit p{
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+.labActive{
+    background-color: #c4daf2;
+}
+/* IMG */
+.befInput img{
+    height: 20px;
+    padding: 4px 8px;
+}
+.befInput .imgUser{
+    height: 24px;
+    padding: 8px 0px 0px 10px;
+}
+.befInput .imgLock {
+    height: 23px;
+    padding: 7px 0px 0px 12px;
+}
+.befInput .imgMail {
+    height: 22px;
+    padding: 10px 0px 0px 10px;
+}
+.pType img{
+    height: 20px;
+    display: inline-block;
+    padding-left: 2px;
+}
+.btnGA img{
+    padding: 10px;
+    display: inline-block;
+}
+.singleType{
+    position: relative;
+}
+.GAMember img{
+    height: 40px;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+}
+.form-wrap .form-box{
+    max-width: 639px;
+    border-radius: 0;
+}
+.form-box span.error{
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    padding-left: 38px;
+    line-height: 18px;
+}
+.player-box{
+    text-align: center;
+}
+.player-box .player-area{
+    max-width: 80%;
+    display: inline-block;
+    width: 100%;
+    padding-top: 59%;
+}
+
+/* Responsive - Mobile */
+@media screen and (max-width: 640px){
+    .GetACont{
+        width: 330px;
+        height: 680px;
+        padding: 5px;
+    }
+    .GetACont h3{
+        font-size: 18px;
+        text-align: center;
+    }
+    .GetACont h2{
+        font-size: 18px;
+    }
+    /* Memebrship Type */
+    .singleType{
+        height: 60px;
+    }
+    .singleType input{
+        margin: 13px 5px;
+    }
+    .GetACont input[type=radio]{
+        margin-top: 18px;
+    }
+    .singleType .titleCont{
+        width: 56%;
+    }
+    .titleCont .title{
+        font-size: 18px;
+    }
+    .singleType.amount span{
+        font-size: 30px;
+    }
+    .singleType .titleCont p{
+        font-size: 14px;
+    }
+    .singleType .amount{
+        width: 28%;
+        margin-top: 7px;
+    }
+    .singleType .amount .mth{
+        bottom: 17px;
+    }
+    .titleCont img{
+        display: none;
+    }
+    /* Get Access now! */
+    .btnGA img{
+        padding: 5px;
+    }
+    .btnGA{
+        width: 90%;
+        height: 55px;
+    }
+    .GASubmit{
+        height: 9%;
+    }
+    /* Create Your Account */
+    .GACreate{
+        border-right: 1px solid #e9e9e9;
+        width: 44%;
+    }
+    .GACreate input[type="text"],
+    .GACreate input[type="email"],
+    .GACreate input[type="password"]{
+        padding: 3px;
+        width: 90%;
+        margin-top: 13px;
+        height: 33px;
+    }
+    .GACreate .befInput{
+        width: 0%;
+        display: none;
+    }
+    .befInput img{
+        display: none;
+    }
+    .errorWin{
+        height: 30px;
+    }
+    /* Payment Type */
+    .GAPay{
+        height: 37%;
+    }
+    .GetACont input[type=radio]{
+        margin-top: 5px;
+    }
+    .GAPay span{
+        padding-right: 40px;
+    }
+    .GAPay img{
+        border-bottom: 1px solid #e9e9e9;
+        padding-bottom: 3px;
+    }
+    .GAPay .pType3 span{
+        padding-right: 30px;
+    }
+    .GAPay .pType4 img{
+        border-bottom: 0px solid #e9e9e9;
+    }
+    .form-wrap{
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+    }
+    .form-wrap .form-box{
+        max-width: 100%;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: inherit;
+    }
+    .player-box .player-area{
+        max-width: 100%;
+        position: absolute;
+        left: 0;
+        top: 10px;
+        right: 0;
+    }
+    .GACreate{
+        width: 100%;
+        height: auto;
+        display: inline-block;
+        margin-top: 15px;
+    }
+    .GAPay{
+        width: 100%;
+        height: auto;
+        display: inline-block;
+        margin-top: 15px;
+        border-right: 0;
+    }
+    .GetACont h3{
+        padding-bottom: 15px;
+    }
+    .GAMember{
+        margin-top: 20px;
+    }
+    .GAPay .pType3 span{
+        padding-right: 5px;
+    }
+    .GetACont input[type="radio"]{
+        margin-top: 17px;
+    }
+    .singleType .titleCont{
+        line-height: 23px;
+        width: 51%;
+    }
+    .singleType .amount{
+        margin-top: 3px;
+    }
+    .singleType .amount .mth{
+        right: -15px;
+    }
+    .GetACont{
+        height: auto!important;
+        width: 100%;
+    }
+    .titleCont .title{
+        font-size: 16px;
+    }
+    .GACreate input[type="text"], .GACreate input[type="email"], .GACreate input[type="password"]{
+        width: 100%;
+    }
+    .btnGA{
+        width: 100%;
+        height: auto;
+    }
+    .singleType .amount{
+        font-size: 25px;
+        margin-top: 9px;
+        width: 33%;
+    }
+    .singleType .amount sup{
+        font-size: 12px;
+    }
+    .singleType .amount .mth{
+        font-size: 10px;
+        right: 0;
+    }
+    .strike{
+        position: absolute;
+        top: -11px;
+        right: 39px;
+        font-size: 14px;
+        color: #909090;
+    }
+}
+@media screen and (max-width: 480px){
+    .singleType .titleCont p{
+        display: none;
+    }
+}
+
+.modal-body .form-box{
+    max-width: 637px;
+}
+
