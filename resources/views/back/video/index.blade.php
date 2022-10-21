@@ -194,8 +194,84 @@
                                         <!--begin::Content-->
                                         <div class="flex-row-fluid py-lg-5 px-lg-15">
                                             <!--begin::Form-->
-                                            <form class="form" id="" enctype="multipart/form-data" method="post" action="{{route('video.store')}}">
+                                            <form class="form" id="fileUploadForm" enctype="multipart/form-data" method="post" action="{{route('video.store')}}">
                                                 @csrf
+                                                <!--begin::Modal - Select Users-->
+                                                    <div class="modal fade" id="kt_progress_modal" tabindex="-1" aria-hidden="true">
+                                                        <!--begin::Modal dialog-->
+                                                        <div class="modal-dialog mw-700px">
+                                                            <!--begin::Modal content-->
+                                                            <div class="modal-content">
+                                                                <!--begin::Modal header-->
+                                                                <div class="modal-header pb-0 border-0 d-flex justify-content-end">
+                                                                    <!--begin::Close-->
+                                                                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                                        <span class="svg-icon svg-icon-1">
+                                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
+                                                                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <!--end::Svg Icon-->
+                                                                    </div>
+                                                                    <!--end::Close-->
+                                                                </div>
+                                                                <!--end::Modal header-->
+                                                                <!--begin::Modal body-->
+                                                                <div class="modal-body scroll-y mx-5 mx-xl-10 pt-0 pb-15">
+                                                                    <!--begin::Users-->
+                                                                    <div class="mh-475px scroll-y me-n7 pe-7">
+                                                                        <!--begin::User-->
+                                                                        <div class="border border-hover-primary p-7 rounded mb-7">
+                                                                            <!--begin::Wrapper-->
+                                                                            <div class="p-0">
+                                                                                <!--begin::Footer-->
+                                                                                <div class="d-flex flex-column">
+                                                                                    <div class="form-group">
+                                                                                        <div class="progress">
+                                                                                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!--begin::Separator-->
+                                                                                    <div class="separator separator-dashed border-muted my-5"></div>
+                                                                                    <!--end::Separator-->
+                                                                                    <!--begin::Action-->
+                                                                                    <div class="d-flex flex-stack">
+
+                                                                                        <!--begin::Progress-->
+                                                                                        <div class="d-flex flex-column mw-200px">
+                                                                                            <div class="d-flex align-items-center mb-2">
+                                                                                                <span id="kt_percent" class="text-gray-700 fs-6 fw-semibold me-2">100%</span>
+                                                                                                <span id="kt_inprogress" class="text-muted fs-8">In progress </span>
+                                                                                                <span id="kt_finished" class="text-muted fs-8">Finished </span>
+                                                                                                <span id="kt_video_uplaod_loder">
+                                                                                                    <img src="{{asset('assets/img/Eclipse-1s-200px.svg')}}" alt="">
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <!--end::Progress-->
+                                                                                    </div>
+                                                                                    <!--end::Action-->
+                                                                                </div>
+                                                                                <!--end::Footer-->
+                                                                            </div>
+                                                                            <!--end::Wrapper-->
+                                                                        </div>
+                                                                        <!--end::User-->
+                                                                    </div>
+                                                                    <!--end::Users-->
+                                                                </div>
+                                                                <!--end::Modal Body-->
+                                                            </div>
+                                                            <!--end::Modal content-->
+                                                        </div>
+                                                        <!--end::Modal dialog-->
+                                                    </div>
+                                                    <!--end::Modal - Select Users-->
+                                                    <!--begin::Modal - Users Search-->
+
+
                                                 <!--begin::Step 1-->
                                                 <div class="current" data-kt-stepper-element="content">
                                                     <div class="w-100">
@@ -260,7 +336,6 @@
                                                 </div>
                                                 <!--end::Step 3-->
 
-
                                                 <!--begin::Step 3-->
                                                 <div class="current" data-kt-stepper-element="content">
                                                     <div class="w-100">
@@ -301,20 +376,22 @@
                                                     <!--begin::Wrapper-->
                                                     <div>
                                                         <button class="btn btn-lg btn-primary" type="submit">
-                                                <span class="indicator-label">Save
-                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
-                                                    <span class="svg-icon svg-icon-3 ms-2 me-0">
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="currentColor" />
-                                                            <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="currentColor" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </span>
+                                                            <span class="indicator-label">Save
+                                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                                                <span class="svg-icon svg-icon-3 ms-2 me-0">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="currentColor" />
+                                                                        <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="currentColor" />
+                                                                    </svg>
+                                                                </span>
+                                                                <!--end::Svg Icon-->
+                                                            </span>
                                                             <span class="indicator-progress">Please wait...
-                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                            </span>
                                                         </button>
                                                     </div>
+
                                                     <!--end::Wrapper-->
                                                 </div>
                                                 <!--end::Actions-->
@@ -419,15 +496,8 @@
                         <!--end::Col-->
                     </div>
                     <!--end::Row-->
-
-
-
-
-
-
                 </div>
                 <!--end::Tables Widget 11-->
-
             </div>
             <!--end::Content container-->
         </div>
@@ -461,6 +531,8 @@
 <script type="text/javascript"></script>
 {{-- <script src="dist/clipboard.min.js"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+
+
 <script type="text/javascript">
     let Clipboard = new ClipboardJS('.clipboard-btn');
     Clipboard.on('success', function(e) {
@@ -525,10 +597,45 @@
     // });
 </script>
 
-@if(count($errors) > 0)
+
+    @if(count($errors) > 0)
+    <script type="text/javascript">
+        $('#kt_modal_create_app').modal('show');
+    </script>
+    @endif
+
+{{--    progress bar star--}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script type="text/javascript">
-    $('#kt_modal_create_app').modal('show');
+    $(function () {
+        $(document).ready(function () {
+            $('#fileUploadForm').ajaxForm({
+                beforeSend: function () {
+                    var percentage = '0';
+                    $('#kt_progress_modal').modal('show');
+                    $('#kt_percent').hide();
+                    $('#kt_finished').hide();
+                    $('#kt_inprogress').show();
+                    $('#kt_video_uplaod_loder').show();
+                },
+                uploadProgress: function (event, position, total, percentComplete) {
+                    var percentage = percentComplete;
+                    $('.progress .progress-bar').css("width", percentage+'%', function() {
+                        return $(this).attr("aria-valuenow", percentage) + "%";
+                    })
+                },
+                complete: function (xhr) {
+                    $('#kt_percent').show();
+                    $('#kt_finished').show();
+                    $('#kt_inprogress').hide();
+                    $('#kt_video_uplaod_loder').hide();
+                    console.log('File has uploaded');
+                }
+            });
+        });
+    });
 </script>
-@endif
+{{--    progress bar end --}}
 
 @endsection

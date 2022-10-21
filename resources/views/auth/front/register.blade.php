@@ -10,7 +10,7 @@
                     <div class="card-header"><h3>You must be logged in to watch this video</h3></div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('payment') }}">
+                        <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <input type="hidden" value="subscribed" name="role">
 
@@ -120,7 +120,8 @@
                                 <div class="pType field radios">
                                     <br>
                                     <input type="checkbox" name="payement" value="paypal" id="" required data-error-required="Select payment type" >
-                                    <label for="" class="pType3"><span>PayPal</span><img src="https://africancasting.com/t1/assets/epoch/img/payment-image-24.png"></label>
+                                    <label for="" class="pType3"><span>PayPal</span>
+                                        <img src="https://africancasting.com/t1/assets/epoch/img/payment-image-24.png"></label>
                                     <br>
 
                                 </div>
@@ -141,8 +142,6 @@
             </div>
     </div>
 
-
-
     <div class="well-filters mb-3">
         <div class="float-left">
             <h1>You might also like...</h1>
@@ -155,31 +154,31 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="row content-row">
-                {{--                        @foreach($videos as $video)--}}
-                <div class=" col-sm-6 col-md-4 col-lg-3  i-container">
-                    {{--                            <a href="{{route('video.show',$video)}}">--}}
-                    <a href="">
-                        <div class="thumb-overlay" id="playvthumb_10676">
-                            <img src="{{asset('uploads/thumbnail/picsex1.jpg')}}" title="Boat" alt="Boat" class="img-responsive " />
-                            <div class="duration">
-                                <span class="hd-text-icon">HD</span> 00:00
+                @foreach($videos as $video)
+                    <div class=" col-sm-6 col-md-4 col-lg-3  i-container">
+                        {{--                            <a href="{{route('video.show',$video)}}">--}}
+                        <a href="{{route('video.show',$video)}}">
+                            <div class="thumb-overlay" id="playvthumb_10676">
+                                <img src="{{asset($video->thumbnail_file)}}" title="{{asset($video->videoTitle)}}" alt="{{ $video->videoTitle }}" class="img-responsive " />
+                                <div class="duration">
+                                    <span class="hd-text-icon">HD</span> 00:00
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <div class="content-info">
-                        <a href="video/10676/boat.html">
-                            <span class="content-title">Boat</span>
                         </a>
-                        <div class="content-details">
-                            <span class="content-views"> 732 views </span>
-                            <span class="content-rating">
+                        <div class="content-info">
+                            <a href="">
+                                <span class="content-title">{{ $video->videoTitle }}</span>
+                            </a>
+                            <div class="content-details">
+                                <span class="content-views"> 0 views </span>
+                                <span class="content-rating">
 {{--                                        <i class="fas fa-thumbs-up"></i>--}}
                                             <span>100% etoile</span>
                                     </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {{--                        @endforeach--}}
+                @endforeach
             </div>
         </div>
     </div>

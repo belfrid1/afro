@@ -18,13 +18,11 @@ class PaymentController extends Controller
         $this->gateway->setTestMode(true);
     }
 
-    public function pay(Request $request){
-
-
+    public function pay($data){
         try {
             $response = $this->gateway->purchase(array(
 //                'amount' => $data['amount'],
-                'amount' => $request->amount,
+                'amount' => $data['amount'],
                 'currency' => env('PAYPAL_CURRENCY'),
                 'returnUrl' => url('success'),
                 'cancelUrl' => url('error')

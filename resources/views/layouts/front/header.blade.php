@@ -114,17 +114,17 @@
 
                     <!-- start  navbar   -->
                     <li class="nav-item d-block d-md-none ">
-                        <a class="nav-link" href="#">Tags</a>
+                        <a class="nav-link" href="#">Categories</a>
                     </li>
                     <div class="nav-item dropdown d-none d-md-block ">
-                        <a href="tags.html"class="dropdown-toggle nav-link" data-toggle="dropdown">
-                            Tags <b class="caret"></b>
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            Categories <b class="caret"></b>
                         </a>
                         <div class="dropdown-menu multi-column-dropdown">
                             <div class="container">
                                 <div class="sub-menu-left w-100 m-b-10">
                                     <div class="sub-menu-title">
-                                        Popular Tags
+                                        Popular Categories
                                     </div>
                                     <div class="sub-menu-content">
                                         <div class="row content-row">
@@ -134,7 +134,7 @@
                                                 <span>
                                                     <span class="tag-counter">{{$tag->id}}</span>
                                                     <i class="fas fa-search"></i>
-                                                    <a href="search/videos/filmbluray.html" title="filmbluray">{{ $tag->tagName }}</a>
+                                                    <a href="#" title="filmbluray">{{ $tag->tagName }}</a>
                                                 </span>
                                             </div>
                                             <!-- end  tag   -->
@@ -151,8 +151,15 @@
                     <!-- start  navbar   -->
 
                 </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item "> <a class="nav-link" href="#">UPLOAD</a> </li>
+                <ul class="navbar-nav ml-auto myanimation">
+                    <li class="nav-item" >
+                        <a class="nav-link dropdown-item"  href="{{route('register')}}">
+                            <span style="font-size: 3em; color:#FFA54E" >
+                                 Try it now !
+                            </span>
+
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

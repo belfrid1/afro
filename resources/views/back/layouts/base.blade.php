@@ -140,6 +140,9 @@
     <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
+
+
+
     <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used by this page)-->
@@ -150,6 +153,8 @@
     {{--<script src="{{asset('assets/js/custom/utilities/modals/create-app.js')}}"></script>--}}
     <script src="{{asset('assets/js/custom/utilities/modals/new-target.js')}}"></script>
     <script src="{{asset('assets/js/custom/utilities/modals/users-search.js')}}"></script>
+
+
 
 
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

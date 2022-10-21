@@ -60,8 +60,8 @@
                                 <div class="float-left ml-2 mr-2" style="line-height: 38px;">
                                     &times;
                                 </div>
-                                <div class="float-left mr-2"> <input id="custom_height" type="text" class="form-control"
-                                                                     value="" placeholder="Height" style="width: 100px!important;" /> </div>
+                                <div class="float-left mr-2">
+                                    <input id="custom_height" type="text" class="form-control" value="" placeholder="Height" style="width: 100px!important;" /> </div>
                                 <div class="float-left" style="line-height: 38px;">
                                     (Min: 320 &times; 180)
                                 </div>

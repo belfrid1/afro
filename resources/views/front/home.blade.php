@@ -30,14 +30,14 @@
 {{--                                </video>--}}
                                 <a href="{{route('video.show',$video)}}">
                                     <div class="thumb-overlay" id="playvthumb_13">
-                                        <img src="{{asset($video->thumbnail_file)}}" title="{{asset($video->videoTitle)}}" alt="T{{ $video->videoTitle }}" class="img-responsive " />
+                                        <img src="{{asset($video->thumbnail_file)}}" title="{{asset($video->videoTitle)}}" alt="{{ $video->videoTitle }}" class="img-responsive " />
                                         <div class="duration"> <span class="hd-text-icon">HD</span> 04:12
                                         </div>
                                     </div>
                                 </a>
 
                                 <div class="content-info">
-                                    <a href="">
+                                    <a href="{{route('video.show',$video)}}">
                                         <span class="content-title">{{ $video->videoTitle }}</span>
                                     </a>
                                     <div class="content-details">

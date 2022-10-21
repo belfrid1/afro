@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,6 +31,12 @@ class LoginController extends Controller
 //    protected $redirectTo = RouteServiceProvider::HOME;
     public function redirectTo() {
         $role = Auth::user()->role;
+
+        if($role == 'subscribed'){
+            if(!Auth::user()->end_subscription_date->gt(Carbon::today())){
+                return  redirect('/register');
+            }
+        }
 
         switch ($role) {
             case 'admin':

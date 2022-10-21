@@ -8,6 +8,7 @@ use App\Models\Tag;
 use App\Models\Video;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -72,7 +73,7 @@ class RegisterController extends Controller
     {
 
         if($data['role'] !== "subscribed"){
-
+            //for admin
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -81,15 +82,31 @@ class RegisterController extends Controller
             ]);
         }else{
             $response = (new PaymentController)->pay($data);
+            // 16.66 for 6 month 19.98 for 3 month 29.25 for 1 month
+            $today = Carbon::today();
+            // for 1 month
+            if($data['amount'] == 29.25){
+                $periodeSubscription = Carbon::parse($today)->addDay(30) ;
+            }
+            // 3 moonth
+            if($data['amount'] == 19.98){
 
-            dd($response);
+                $periodeSubscription = Carbon::parse($today)->addDay(90) ;
+            }
+            // 6 moonth
+            if($data['amount'] == 16.66){
+                $periodeSubscription = Carbon::parse($today)->addDay(180) ;
 
+            }
+
+            $end_subscription_date = $today + $periodeSubscription;
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'role' => $data['role'],
                 'payment_status' => false,
+                'end_subscription_date' => $end_subscription_date,
             ]);
         }
     }

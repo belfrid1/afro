@@ -56,7 +56,7 @@ class VideoController extends Controller
             'videoTitle' => 'required|string|unique:videos',
             'trailer_file' => 'required|mimes:ogg,mp4,3gp,avi',
             'video_file' => 'required|mimes:ogg,mp4,3gp,avi',
-            'thumbnail_file' => 'required|mimes:jpeg,png,bmp,tiff |max:4096\'',
+            'thumbnail_file' => 'required|mimes:jpeg,png,bmp,tiff',
             'tag_id' => 'required',
         ]);
 
@@ -130,7 +130,7 @@ class VideoController extends Controller
     {
         $user = Auth::user();
         if(!$user){
-            return  redirect('/');
+            return  redirect('/register');
         }
 
         if($user->payment_status == true){
