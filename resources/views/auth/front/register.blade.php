@@ -10,7 +10,7 @@
                     <div class="card-header"><h3>You must be logged in to watch this video</h3></div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('payment') }}">
                             @csrf
                             <input type="hidden" value="subscribed" name="role">
 

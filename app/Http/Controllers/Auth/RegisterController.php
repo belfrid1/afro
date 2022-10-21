@@ -80,35 +80,36 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
                 'role' => $data['role'],
             ]);
-        }else{
-            $response = (new PaymentController)->pay($data);
-            // 16.66 for 6 month 19.98 for 3 month 29.25 for 1 month
-            $today = Carbon::today();
-            // for 1 month
-            if($data['amount'] == 29.25){
-                $periodeSubscription = Carbon::parse($today)->addDay(30) ;
-            }
-            // 3 moonth
-            if($data['amount'] == 19.98){
-
-                $periodeSubscription = Carbon::parse($today)->addDay(90) ;
-            }
-            // 6 moonth
-            if($data['amount'] == 16.66){
-                $periodeSubscription = Carbon::parse($today)->addDay(180) ;
-
-            }
-
-            $end_subscription_date = $today + $periodeSubscription;
-            return User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'role' => $data['role'],
-                'payment_status' => false,
-                'end_subscription_date' => $end_subscription_date,
-            ]);
         }
+//        else{
+//            $response = (new PaymentController)->pay($data);
+//            // 16.66 for 6 month 19.98 for 3 month 29.25 for 1 month
+//            $today = Carbon::today();
+//            // for 1 month
+//            if($data['amount'] == 29.25){
+//                $periodeSubscription = Carbon::parse($today)->addDay(30) ;
+//            }
+//            // 3 moonth
+//            if($data['amount'] == 19.98){
+//
+//                $periodeSubscription = Carbon::parse($today)->addDay(90) ;
+//            }
+//            // 6 moonth
+//            if($data['amount'] == 16.66){
+//                $periodeSubscription = Carbon::parse($today)->addDay(180) ;
+//
+//            }
+//
+//            $end_subscription_date = $today + $periodeSubscription;
+//            return User::create([
+//                'name' => $data['name'],
+//                'email' => $data['email'],
+//                'password' => Hash::make($data['password']),
+//                'role' => $data['role'],
+//                'payment_status' => false,
+//                'end_subscription_date' => $end_subscription_date,
+//            ]);
+//        }
     }
 
     public function showRegistrationForm(){

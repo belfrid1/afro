@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Omnipay\Omnipay;
 
 class PaymentController extends Controller
@@ -60,6 +62,36 @@ class PaymentController extends Controller
                 $payment->payment_status = $arr['state'];
 
                 $payment->save();
+
+                dd('ici ha ');
+                //
+                // 16.66 for 6 month 19.98 for 3 month 29.25 for 1 month
+                $today = Carbon::today();
+                // for 1 month
+                if($request->amount == 29.25){
+                    $periodeSubscription = Carbon::parse($today)->addDays(30) ;
+                }
+                // 3 moonth
+                if($request->amount == 19.98){
+
+                    $periodeSubscription = Carbon::parse($today)->addDays(90) ;
+                }
+                // 6 moonth
+                if($request->amount == 16.66){
+                    $periodeSubscription = Carbon::parse($today)->addDays(180) ;
+
+                }
+
+                $end_subscription_date = $today + $periodeSubscription;
+                return User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'role' => $request->role,
+                    'payment_status' => false,
+                    'end_subscription_date' => $end_subscription_date,
+                ]);
+                //
 
                 return "Payment is Successfull. Your Transaction Id is : ".$arr['id'];
 
