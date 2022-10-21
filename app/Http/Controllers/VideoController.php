@@ -129,9 +129,7 @@ class VideoController extends Controller
     public function show($slug)
     {
         $user = Auth::user();
-        if(!$user){
-            return  redirect('/register');
-        }
+
 
         if($user->payment_status == true){
             $tags = Tag::all();
@@ -140,7 +138,17 @@ class VideoController extends Controller
 
             return view('front.video.show',compact('videos' ,'tags','video'));
         }else{
-            return  redirect('/');
+            if($user->role == 'admin'){
+                $tags = Tag::all();
+                $videos = Video::all();
+                $video = Video::where('slug',$slug)->first();
+
+                return view('front.video.show',compact('videos' ,'tags','video'));
+
+            }else{
+                return  redirect('/register');
+            }
+
         }
 
     }

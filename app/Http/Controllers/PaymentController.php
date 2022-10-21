@@ -63,7 +63,6 @@ class PaymentController extends Controller
 
                 $payment->save();
 
-                dd('ici ha ');
                 //
                 // 16.66 for 6 month 19.98 for 3 month 29.25 for 1 month
                 $today = Carbon::today();
@@ -88,7 +87,7 @@ class PaymentController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'role' => $request->role,
-                    'payment_status' => false,
+                    'payment_status' => true,
                     'end_subscription_date' => $end_subscription_date,
                 ]);
                 //
