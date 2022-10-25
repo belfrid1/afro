@@ -129,7 +129,10 @@ class VideoController extends Controller
     public function show($slug)
     {
         $user = Auth::user();
-
+        // no auth user
+        if(!$user){
+            return  redirect('/register');
+        }
 
         if($user->payment_status == true){
             $tags = Tag::all();
