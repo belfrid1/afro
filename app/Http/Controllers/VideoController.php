@@ -23,7 +23,7 @@ class VideoController extends Controller
         $videos = Video::all();
         $tags = Tag::all();
 
-        return view('back.video.index',compact('videos','tags'));
+        return view('back.video.index', compact('videos', 'tags'));
     }
 
     /**
@@ -46,11 +46,11 @@ class VideoController extends Controller
 
         $uploadPath = 'uploads';
 
-        if(!File::isDirectory($uploadPath)) {
+        if (!File::isDirectory($uploadPath)) {
 
-           $videoPath =  File::makeDirectory($uploadPath.'/vid', 0777, true, true);
-           $thumbnailPath =  File::makeDirectory($uploadPath.'/thumb', 0777, true, true);
-           $trailerPat =  File::makeDirectory($uploadPath.'/trail', 0777, true, true);
+            $videoPath =  File::makeDirectory($uploadPath . '/vid', 0777, true, true);
+            $thumbnailPath =  File::makeDirectory($uploadPath . '/thumb', 0777, true, true);
+            $trailerPat =  File::makeDirectory($uploadPath . '/trail', 0777, true, true);
         }
         $request->validate([
             'videoTitle' => 'required|string|unique:videos',
@@ -60,9 +60,9 @@ class VideoController extends Controller
             'tag_id' => 'required',
         ]);
 
-        $dateFormated = Carbon::today().time();
+        $dateFormated = Carbon::today() . time();
 
-        if($request->hasFile('video_file')  && $request->hasFile('trailer_file') && $request->hasFile('thumbnail_file') ){
+        if ($request->hasFile('video_file')  && $request->hasFile('trailer_file') && $request->hasFile('thumbnail_file')) {
             $videoFile = $request->file('video_file');
             $trailer_file = $request->file('trailer_file');
             $thumbnailFile = $request->file('thumbnail_file');
@@ -71,27 +71,27 @@ class VideoController extends Controller
             $extTrailer = $request->trailer_file->getClientOriginalExtension();
             $extThumbnail = $request->thumbnail_file->getClientOriginalExtension();
 
-            $filenameVideo = 'vid'.$dateFormated.'.'.$extVideo;
-            $filenameTrailer = 'trail'.$dateFormated.'.'.$extTrailer;
-            $filenameThumbnail = 'thumb'.$dateFormated.'.'.$extThumbnail;
+            $filenameVideo = 'vid' . $dateFormated . '.' . $extVideo;
+            $filenameTrailer = 'trail' . $dateFormated . '.' . $extTrailer;
+            $filenameThumbnail = 'thumb' . $dateFormated . '.' . $extThumbnail;
 
-            $newFilename = 'VID_'.$dateFormated;
+            $newFilename = 'VID_' . $dateFormated;
 
-//            $img = Image::make($thumbnailFile)->resize(320, 240)->insert($uploadPath.'/thumb');
+            //            $img = Image::make($thumbnailFile)->resize(320, 240)->insert($uploadPath.'/thumb');
             $img = Image::make($thumbnailFile)->resize(320, 240);
-            $fullPathVideo = $uploadPath.'/vid/'.$filenameVideo;
-            $fullPathTrailer = $uploadPath.'/trail/'.$filenameTrailer;
-            $fullPathThumbnail = $uploadPath.'/thumb/'.$filenameThumbnail;
+            $fullPathVideo = $uploadPath . '/vid/' . $filenameVideo;
+            $fullPathTrailer = $uploadPath . '/trail/' . $filenameTrailer;
+            $fullPathThumbnail = $uploadPath . '/thumb/' . $filenameThumbnail;
 
-           $videoFile =  $videoFile->move($uploadPath.'/vid', $filenameVideo);
-           $trailerFile =  $trailer_file->move($uploadPath.'/trail', $filenameTrailer);
-           $thumbnailFile = Image::make($thumbnailFile)->resize(320, 240)->save($uploadPath.'/thumb/'.$filenameThumbnail);
-//           $thumbnailFile =  $thumbnailFile->move($uploadPath.'/thumb', $filenameThumbnail);
+            $videoFile =  $videoFile->move($uploadPath . '/vid', $filenameVideo);
+            $trailerFile =  $trailer_file->move($uploadPath . '/trail', $filenameTrailer);
+            $thumbnailFile = Image::make($thumbnailFile)->resize(320, 240)->save($uploadPath . '/thumb/' . $filenameThumbnail);
+            //           $thumbnailFile =  $thumbnailFile->move($uploadPath.'/thumb', $filenameThumbnail);
 
-           // save picture into folder
-//            return $file->move($path, $filename);
+            // save picture into folder
+            //            return $file->move($path, $filename);
 
-           $video =  Video::create(
+            $video =  Video::create(
                 [
                     'videoTitle' => $request->videoTitle,
                     'video_file' => $fullPathVideo,
@@ -100,19 +100,19 @@ class VideoController extends Controller
                     'tag_id' => $request->tag_id,
                 ]
             );
-            if(!$video){
+            if (!$video) {
                 return back()->with(['error' => "unable to record video"]);
             }
-            if(!$videoFile){
+            if (!$videoFile) {
                 return back()->with(['error' => "unable to save video in folder"]);
             }
-            if(!$trailerFile){
+            if (!$trailerFile) {
                 return back()->with(['error' => "unable to save trailer in folder"]);
             }
-            if(!$thumbnailFile){
+            if (!$thumbnailFile) {
                 return back()->with(['error' => "unable to save Thumbnail in folder"]);
             }
-        }else{
+        } else {
             return back()->with(['error' => "Please select a correct video file"]);
         }
 
@@ -130,30 +130,27 @@ class VideoController extends Controller
     {
         $user = Auth::user();
         // no auth user
-        if(!$user){
+        if (!$user) {
             return  redirect('/register');
         }
 
-        if($user->payment_status == true){
+        if ($user->payment_status == true) {
             $tags = Tag::all();
             $videos = Video::all();
-            $video = Video::where('slug',$slug)->first();
+            $video = Video::where('slug', $slug)->first();
 
-            return view('front.video.show',compact('videos' ,'tags','video'));
-        }else{
-            if($user->role == 'admin'){
+            return view('front.video.show', compact('videos', 'tags', 'video'));
+        } else {
+            if ($user->role == 'admin') {
                 $tags = Tag::all();
                 $videos = Video::all();
-                $video = Video::where('slug',$slug)->first();
+                $video = Video::where('slug', $slug)->first();
 
-                return view('front.video.show',compact('videos' ,'tags','video'));
-
-            }else{
+                return view('front.video.show', compact('videos', 'tags', 'video'));
+            } else {
                 return  redirect('/register');
             }
-
         }
-
     }
 
     /**
@@ -165,9 +162,9 @@ class VideoController extends Controller
     {
         $video = Video::find($video)->first();
         $tags = Tag::all();
-        if($video){
-            return view('back.video.edit',compact('video','tags'));
-        }else{
+        if ($video) {
+            return view('back.video.edit', compact('video', 'tags'));
+        } else {
             return redirect()->back()->with(['error' => "This Video doesn't exist"]);
         }
     }
@@ -185,45 +182,45 @@ class VideoController extends Controller
         $fullPathVideo = $video->video_file;
         $fullPathTrailer = $video->trailer_file;
         $fullPathThumbnail = $video->thumbnail_file;
-        $dateFormated = Carbon::today().time();
+        $dateFormated = Carbon::today() . time();
         // if video file has changer
         // remove the old and take the new
-        if($request->video_file){
-            if(Storage::exists($fullPathVideo)){
+        if ($request->video_file) {
+            if (Storage::exists($fullPathVideo)) {
                 Storage::delete($fullPathVideo);
             }
             $videoFile = $request->file('video_file');
             $extVideo = $request->video_file->getClientOriginalExtension();
-            $filenameVideo = 'vid'.$dateFormated.'.'.$extVideo;
-            $fullPathVideo = $uploadPath.'/vid/'.$filenameVideo;
-            $videoFile =  $videoFile->move($uploadPath.'/vid', $filenameVideo);
-            if(!$videoFile){
+            $filenameVideo = 'vid' . $dateFormated . '.' . $extVideo;
+            $fullPathVideo = $uploadPath . '/vid/' . $filenameVideo;
+            $videoFile =  $videoFile->move($uploadPath . '/vid', $filenameVideo);
+            if (!$videoFile) {
                 return back()->with(['error' => "unable to save video in folder"]);
             }
         }
-        if($request->trailer_file){
-            if(Storage::exists($fullPathTrailer)){
+        if ($request->trailer_file) {
+            if (Storage::exists($fullPathTrailer)) {
                 Storage::delete($fullPathTrailer);
             }
             $trailer_file = $request->file('trailer_file');
             $extTrailer = $request->trailer_file->getClientOriginalExtension();
-            $filenameTrailer = 'trail'.$dateFormated.'.'.$extTrailer;
-            $fullPathTrailer = $uploadPath.'/trail/'.$filenameTrailer;
-            $trailerFile =  $trailer_file->move($uploadPath.'/trail', $filenameTrailer);
-            if(!$trailerFile){
+            $filenameTrailer = 'trail' . $dateFormated . '.' . $extTrailer;
+            $fullPathTrailer = $uploadPath . '/trail/' . $filenameTrailer;
+            $trailerFile =  $trailer_file->move($uploadPath . '/trail', $filenameTrailer);
+            if (!$trailerFile) {
                 return back()->with(['error' => "unable to save trailer in folder"]);
             }
         }
-        if($request->thumbnail_file){
-            if(Storage::exists($fullPathThumbnail)){
+        if ($request->thumbnail_file) {
+            if (Storage::exists($fullPathThumbnail)) {
                 Storage::delete($fullPathThumbnail);
             }
             $thumbnailFile = $request->file('thumbnail_file');
             $extThumbnail = $request->thumbnail_file->getClientOriginalExtension();
-            $filenameThumbnail = 'thumb'.$dateFormated.'.'.$extThumbnail;
-            $fullPathThumbnail = $uploadPath.'/thumb/'.$filenameThumbnail;
-            $thumbnailFile = Image::make($thumbnailFile)->resize(320, 240)->save($uploadPath.'/thumb/'.$filenameThumbnail);
-            if(!$thumbnailFile){
+            $filenameThumbnail = 'thumb' . $dateFormated . '.' . $extThumbnail;
+            $fullPathThumbnail = $uploadPath . '/thumb/' . $filenameThumbnail;
+            $thumbnailFile = Image::make($thumbnailFile)->resize(320, 240)->save($uploadPath . '/thumb/' . $filenameThumbnail);
+            if (!$thumbnailFile) {
                 return back()->with(['error' => "unable to save Thumbnail in folder"]);
             }
         }
@@ -231,7 +228,7 @@ class VideoController extends Controller
 
 
         $videoToUpdate = Video::find($video)->first();
-        if($videoToUpdate){
+        if ($videoToUpdate) {
             $videoUpdated = $videoToUpdate->update([
                 'videoTitle' => $request->videoTitle,
                 'video_file' => $fullPathVideo,
@@ -241,15 +238,14 @@ class VideoController extends Controller
 
             ]);
 
-            if(!$videoUpdated){
+            if (!$videoUpdated) {
                 return back()->with(['error' => "unable to record video"]);
             }
             return redirect()->route('video.index')
                 ->with(['success' => "video edited successfully."]);
-        }else{
+        } else {
             return redirect()->back()->with(['error' => "unable to find the video"]);
         }
-
     }
 
     /**

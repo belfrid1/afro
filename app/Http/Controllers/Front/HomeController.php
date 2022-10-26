@@ -20,6 +20,6 @@ class HomeController extends Controller
 
         $tags = Tag::all();
         $videos = Video::All();
-        return view('front.home', compact('tags','videos'));
+        return view('front.home', compact('tags', 'videos'));
     }
 }
