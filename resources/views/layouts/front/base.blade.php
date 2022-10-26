@@ -72,8 +72,8 @@
     <link rel="stylesheet" href="{{asset('assets/css/easy-autocomplete.themes.min.css')}}">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/supplement.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+{{--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">--}}
     @yield('stylesheets')
 </head>
 
@@ -1350,6 +1350,9 @@
     <script type="text/javascript" src="{{asset('assets/js/jquery.rotator.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/jquery.main.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/jquery.easy-autocomplete.min.js')}}"></script>
+
+
+    <!-- complement   -->
     <script>
         if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
             var msViewportStyle = document.createElement('style')
@@ -1410,7 +1413,7 @@
     </script>
 
     {{--pay pal script --}}
-    @yield('stylesheets')
+    @yield('javascripts')
 
 
 </body>

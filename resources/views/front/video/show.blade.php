@@ -1,5 +1,7 @@
 @extends('layouts.front.base')
-
+@section('stylesheets')
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+@endsection
 @section('main_wrapper')
     <div id="wrapper">
         <div class="container mt-3 mb-3">
@@ -9,11 +11,19 @@
             <div class="row">
                 <div class="content-left mt-3 mb-3">
                     <div class="video-container">
-                        <video width="820" height="640" id="video" class="" preload controls  >
-                            <source  src="{{ asset($video->video_file) }}" type='video/mp4'  />
-                            <source  src="{{ asset($video->video_file) }}" type='video/ogg'  />
+                        <video width="600" height="400" id="video" class="video-js"   preload="auto" controls  >
+                            <source  src="{{ asset($video->video_file) }}" type="video/mp4"  />
+                            <source  src="{{ asset($video->video_file) }}" type="video/ogg"  />
+                            <source src="{{ asset($video->video_file) }}" type="video/webm" />
+                            <source src="{{ asset($video->video_file) }}" type="video/3gp" />
+                            <source src="{{ asset($video->video_file) }}" type="video/avi" />
+                            <source src="{{ asset($video->video_file) }}" type="video/mpg" />
+                            <source src="{{ asset($video->video_file) }}" type="video/wmv" />
+                            <source src="{{ asset($video->video_file) }}" type="video/mpeg" />
+                            <source src="{{ asset($video->video_file) }}" type="video/mov" />
+                            <source src="{{ asset($video->video_file) }}" type="video/flv" />
                             <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that
-                                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                                <a href="{{ asset($video->video_file) }}" target="_blank">download the MP4</a>
                             </p>
                         </video>
                     </div>
@@ -30,11 +40,11 @@
                                     </a>
                                     <ul>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="video_download">
-                                        <a class="dropdown-item" href="../../19_720pbb97.mp4?id=19&amp;label=720p">HD -720p (MP4)</a>
-                                        <a class="dropdown-item" href="../../19_480p6fa2.mp4?id=19&amp;label=480p">HD - 480p (MP4)</a>
-                                        <a class="dropdown-item" href="../../19_360peebd.mp4?id=19&amp;label=360p">SD - 360p (MP4)</a>
-                                        <a class="dropdown-item" href="../../19_240pb830.mp4?id=19&amp;label=240p">SD - 240p (MP4)</a>
-                                    </div>
+                                            <a class="dropdown-item" href="{{ asset($video->video_file) }}?id=19&amp;label=720p">HD -720p (MP4)</a>
+                                            <a class="dropdown-item" href="../../19_480p6fa2.mp4?id=19&amp;label=480p">HD - 480p (MP4)</a>
+                                            <a class="dropdown-item" href="../../19_360peebd.mp4?id=19&amp;label=360p">SD - 360p (MP4)</a>
+                                            <a class="dropdown-item" href="../../19_240pb830.mp4?id=19&amp;label=240p">SD - 240p (MP4)</a>
+                                        </div>
                                     </ul>
 
                                 </span>
@@ -128,9 +138,12 @@
             });
         });
     </script>
-    <script type="text/javascript" src="{{asset('assets/js/jquery.comments.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/js/jquery.voting.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/js/jquery.video.js')}}"></script>
+{{--    <script type="text/javascript" src="{{asset('assets/js/jquery.comments.js')}}"></script>--}}
+{{--    <script type="text/javascript" src="{{asset('assets/js/jquery.voting.js')}}"></script>--}}
+{{--    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />--}}
+
+    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+
 
     <script src="{{asset('assets/js/video-js-events.js')}}"></script>
     <script>
@@ -142,6 +155,24 @@
                 )
             )
             document.querySelector('head').appendChild(msViewportStyle)
+        }
+
+        // get video duration
+
+        var myPlayer = videojs('vemvo-player');
+
+        if (myPlayer.readyState() < 1) {
+            // wait for loadedmetdata event
+            myPlayer.one("loadedmetadata", onLoadedMetadata);
+        }
+        else {
+            // metadata already loaded
+            onLoadedMetadata();
+        }
+
+        function onLoadedMetadata() {
+            alert(myPlayer.duration());
+            $('#duration').html("Duration: " + myPlayer.duration());
         }
     </script>
 
