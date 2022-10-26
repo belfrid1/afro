@@ -54,8 +54,8 @@ class VideoController extends Controller
         }
         $request->validate([
             'videoTitle' => 'required|string|unique:videos',
-            'trailer_file' => 'required|mimes:ogg,mp4,3gp,avi',
-            'video_file' => 'required|mimes:ogg,mp4,3gp,avi',
+            'trailer_file' => 'required|mimes:ogg,mp4,3gp,avi,mpg,wmv,mpeg,mov,webm,flv',
+            'video_file' => 'required|mimes:ogg,mp4,3gp,avi,mpg,wmv,mpeg,mov,webm,flv',
             'thumbnail_file' => 'required|mimes:jpeg,png,bmp,tiff',
             'tag_id' => 'required',
         ]);
