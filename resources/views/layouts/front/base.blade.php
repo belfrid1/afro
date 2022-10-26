@@ -61,19 +61,19 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('assets/css/easy-autocomplete.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/easy-autocomplete.themes.min.css')}}">
-    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/supplement.css')}}" rel="stylesheet">
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('assets/css/easy-autocomplete.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/easy-autocomplete.themes.min.css') }}">
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/supplement.css?a') }}" rel="stylesheet">
 
-{{--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">--}}
+    {{--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> --}}
     @yield('stylesheets')
 </head>
 
@@ -82,37 +82,41 @@
     <!-- start login modal  -->
     <div class="modal fade in" id="login-modal">
         <div class="modal-dialog login-modal">
-        <div class="modal-content">
-            <form  method="post" action="{{route('login')}}">
-                @csrf
-                <div class="modal-header">
-                    <h4 class="modal-title">Member Login</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body"> <input name="current_url" type="hidden" value="/" />
-{{--                    <input name="username" type="text" value="" id="login_username" class="form-control mb-3" placeholder="{{ __('Email Address') }}" />--}}
-                    <!--begin::Email-->
-                    <input type="text" id="email" placeholder="{{ __('Email Address') }}" name="email" autocomplete="off" class="form-control mb-3 bg-transparent {{ $errors->has('email') ? ' is-invalid' : '' }}" />
-                    @error('email')
-                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                    @enderror
+            <div class="modal-content">
+                <form method="post" action="{{ route('login') }}">
+                    @csrf
+                    <div class="modal-header">
+                        <h4 class="modal-title">Member Login</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body"> <input name="current_url" type="hidden" value="/" />
+                        {{--                    <input name="username" type="text" value="" id="login_username" class="form-control mb-3" placeholder="{{ __('Email Address') }}" /> --}}
+                        <!--begin::Email-->
+                        <input type="text" id="email" placeholder="{{ __('Email Address') }}" name="email"
+                            autocomplete="off"
+                            class="form-control mb-3 bg-transparent {{ $errors->has('email') ? ' is-invalid' : '' }}" />
+                        @error('email')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @enderror
 
-                <!--end::Email-->
-                    <label for="password"></label>
-                    <input name="password" type="password" value="" id="login_password" class="form-control mb-3" placeholder="Password" />
-                    <a href="#" id="lost_password">Lost Username or Password?</a><br />
-                    <a href="#" id="confirmation_email">Did not receive confirmation email?</a>
+                        <!--end::Email-->
+                        <label for="password"></label>
+                        <input name="password" type="password" value="" id="login_password"
+                            class="form-control mb-3" placeholder="Password" />
+                        <a href="#" id="lost_password">Lost Username or Password?</a><br />
+                        <a href="#" id="confirmation_email">Did not receive confirmation email?</a>
 
-                </div>
-                <div class="modal-footer">
-                    <button name="submit_login" id="login_submit" type="submit" class="btn btn-primary btn-bold">Login</button>
-{{--                    <a href="#"  class="btn btn-secondary btn-bold">Sign Up</a> --}}
-                </div>
-            </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button name="submit_login" id="login_submit" type="submit"
+                            class="btn btn-primary btn-bold">Login</button>
+                        {{--                    <a href="#"  class="btn btn-secondary btn-bold">Sign Up</a> --}}
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
     </div>
     <!-- end login modal  -->
 
@@ -127,9 +131,12 @@
                     </div>
                     <div class="modal-body">
                         <input name="current_url" type="hidden" value="/" />
-                        <input name="username" type="text" value="" id="login_username" class="form-control mb-3" placeholder="Username" />
-                        <input name="email" type="text" value="" id="login_username" class="form-control mb-3" placeholder="Username" />
-                        <input name="password" type="password" value="" id="login_password" class="form-control mb-3" placeholder="Password" />
+                        <input name="username" type="text" value="" id="login_username"
+                            class="form-control mb-3" placeholder="Username" />
+                        <input name="email" type="text" value="" id="login_username"
+                            class="form-control mb-3" placeholder="Username" />
+                        <input name="password" type="password" value="" id="login_password"
+                            class="form-control mb-3" placeholder="Password" />
 
                     </div>
                     <div class="modal-footer">
@@ -168,46 +175,72 @@
     <!-- start language  modal  -->
     <div class="modal fade" id="language-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Select Language</h4> <button type="button" class="close"
-                                                                     data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="row mb-4">
-                    <div class="col-6 col-sm-4"> <span class="change-language language-active">English</span> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="fr_FR" class="change-language">Français</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="de_DE" class="change-language">Deutsch</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="nl_NL" class="change-language">Dutch</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="es_ES" class="change-language">Español</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="it_IT" class="change-language">Italiano</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="pt_PT" class="change-language">Português</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="pt_BR" class="change-language">Português</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="ru_RU" class="change-language">русский</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="sa_SA" class="change-language">العربية</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="he_IL" class="change-language">עִבְרִית</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="jp_JP" class="change-language">日本語</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="cn_CS" class="change-language">中文简体</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="cn_CT" class="change-language">中文 繁體</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="tr_TR" class="change-language">Türkçe</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="dk_DK" class="change-language">Dansk</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="no_NO" class="change-language">Norsk</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="cz_CZ" class="change-language">Český</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="bn_BD" class="change-language">বাংলা</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="ro_RO" class="change-language">Română</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="pl_PL" class="change-language">Polski</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="hu_HU" class="change-language">Magyar</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="ba_BA" class="change-language">Bosanski</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="hr_HR" class="change-language">Hrvatski</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="rs_RS" class="change-language">Srpski</a> </div>
-                    <div class="col-6 col-sm-4"> <a href="#" id="si_SI" class="change-language">Slovenski</a> </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select Language</h4> <button type="button" class="close"
+                        data-dismiss="modal">&times;</button>
                 </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-6 col-sm-4"> <span class="change-language language-active">English</span>
+                        </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="fr_FR"
+                                class="change-language">Français</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="de_DE"
+                                class="change-language">Deutsch</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="nl_NL"
+                                class="change-language">Dutch</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="es_ES"
+                                class="change-language">Español</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="it_IT"
+                                class="change-language">Italiano</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="pt_PT"
+                                class="change-language">Português</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="pt_BR"
+                                class="change-language">Português</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="ru_RU"
+                                class="change-language">русский</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="sa_SA"
+                                class="change-language">العربية</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="he_IL"
+                                class="change-language">עִבְרִית</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="jp_JP"
+                                class="change-language">日本語</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="cn_CS"
+                                class="change-language">中文简体</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="cn_CT" class="change-language">中文
+                                繁體</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="tr_TR"
+                                class="change-language">Türkçe</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="dk_DK"
+                                class="change-language">Dansk</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="no_NO"
+                                class="change-language">Norsk</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="cz_CZ"
+                                class="change-language">Český</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="bn_BD"
+                                class="change-language">বাংলা</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="ro_RO"
+                                class="change-language">Română</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="pl_PL"
+                                class="change-language">Polski</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="hu_HU"
+                                class="change-language">Magyar</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="ba_BA"
+                                class="change-language">Bosanski</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="hr_HR"
+                                class="change-language">Hrvatski</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="rs_RS"
+                                class="change-language">Srpski</a> </div>
+                        <div class="col-6 col-sm-4"> <a href="#" id="si_SI"
+                                class="change-language">Slovenski</a> </div>
+                    </div>
+                </div>
+                <form name="languageSelect" id="languageSelect" method="post" action="#">
+                    <input name="language" id="language" type="hidden" value="" />
+                </form>
             </div>
-            <form name="languageSelect" id="languageSelect" method="post" action="#">
-                <input name="language" id="language" type="hidden" value="" />
-            </form>
         </div>
-    </div>
     </div>
     <!-- end language modal  -->
 
@@ -228,7 +261,7 @@
 
 
 
-        <script>
+    <script>
         var suggestion_arr = [{
             name: 'wow',
             type: '588'
@@ -1347,9 +1380,9 @@
             type: '2'
         }];
     </script>
-    <script type="text/javascript" src="{{asset('assets/js/jquery.rotator.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/js/jquery.main.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/js/jquery.easy-autocomplete.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/jquery.rotator.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/jquery.main.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/jquery.easy-autocomplete.min.js') }}"></script>
 
 
     <!-- complement   -->
@@ -1368,9 +1401,10 @@
 
 
 
-{{--pay pal script--}}
+    {{-- pay pal script --}}
 
-    <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD"
+        data-sdk-integration-source="button-factory"></script>
     <script>
         function initPayPalButton() {
             paypal.Buttons({
@@ -1384,7 +1418,12 @@
 
                 createOrder: function(data, actions) {
                     return actions.order.create({
-                        purchase_units: [{"amount":{"currency_code":"USD","value":0}}]
+                        purchase_units: [{
+                            "amount": {
+                                "currency_code": "USD",
+                                "value": 0
+                            }
+                        }]
                     });
                 },
 
@@ -1412,7 +1451,7 @@
         initPayPalButton();
     </script>
 
-    {{--pay pal script --}}
+    {{-- pay pal script --}}
     @yield('javascripts')
 
 
