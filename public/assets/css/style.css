@@ -846,6 +846,16 @@ a.show-hide i {
     padding: 10px;
 }
 
+.download {
+    border: 1px solid #e5e5e5!important;
+	background-color: #21d91b82!important;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+	margin: 0 auto 20px;
+    padding: 10px;
+}
+
 .ad-title {
     color: #999;
     font-size: 11px;

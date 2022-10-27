@@ -8,11 +8,11 @@
                     <h1>Videos Being Watched</h1>
                 </div>
                 <div class="float-right well-action">
-                    <a href="videosfb11.html?o=bw">
+                    {{-- <a href="videosfb11.html?o=bw">
                         <span class="d-none d-sm-inline">More Videos</span>
 
                         <span class="d-xs-inline d-sm-none"><i class="fas fa-plus"></i></span>
-                    </a>
+                    </a> --}}
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -137,10 +137,10 @@
                 <div class="float-left">
                     <h1>You might also like...</h1>
                 </div>
-                <div class="float-right well-action"> <a href="videos2359.html?o=mr"><span
+                {{-- <div class="float-right well-action"> <a href="videos2359.html?o=mr"><span
                             class="d-none d-sm-inline">Others
                             Tag Videos</span><span class="d-xs-inline d-sm-none"><i class="fas fa-plus"></i></span></a>
-                </div>
+                </div> --}}
                 <div class="clearfix"></div>
             </div>
             <div class="row">

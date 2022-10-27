@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="content-left mt-3 mb-3">
                     <div class="video-container">
-                        <video width="600" height="400" id="video" class="video-js"   preload="auto" controls  >
+                        <video id="video" class="video-js vjs-16-9 vjs-big-play-centered vjs-sublime-skin"   preload="auto" controls  >
                             <source  src="{{ asset($video->video_file) }}" type="video/mp4"  />
                             <source  src="{{ asset($video->video_file) }}" type="video/ogg"  />
                             <source src="{{ asset($video->video_file) }}" type="video/webm" />
@@ -27,11 +27,17 @@
                             </p>
                         </video>
                     </div>
-                    <div class="ad-body mt-3">
-                        <p class="ad-title"><span>SPONSORS</span><span class="ad-group">VIDEO PLAYER BOTTOM</span></p>
-                        <p class="ad-size">Auto &times; Auto</p>
-                    </div>
-                    <div class="row mt-3">
+
+
+                
+
+                    <a id="video_download" href="{{ asset($video->video_file) }}" class="ad-size btn btn-succes btn-bold btn-xxs" >
+                        <div class="content-center download mt-3">
+                            <i class="fas fa-download"></i>
+                            <p class="ad-size">Donwload</p>
+                        </div>
+                    </a> 
+                    {{-- <div class="row mt-3">
                         <div class="col-12">
                             <div class="video-actions float-left ml-3">
                                 <span>
@@ -52,9 +58,9 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
-                <div class="content-right mt-3 mb-3">
+                <div class="content-center mt-3 mb-3">
                     <div class="ad-body" style="width:300px;">
                         <p class="ad-title"><span>SPONSORS</span><span class="ad-group">VIDEO RIGHT</span></p>
                         <p class="ad-size">300 &times; Auto</p>
