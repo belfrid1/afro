@@ -17,9 +17,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $tags = Tag::all();
         $videos = Video::All();
-        return view('front.home', compact('tags', 'videos'));
+        $duration = [];
+
+        // Video local path
+        $dirname = dirname(__FILE__, 5);
+        // Determination de la durée de chaque video
+        foreach ($videos as $video) {
+            $getID3 = new \getID3;
+            $detectedDuration = $getID3->analyze($dirname . "/public/" . $video->video_file)["playtime_string"];
+            if (strpos($detectedDuration, ":") !== false && strlen($detectedDuration) % 3 == 1) {
+                $detectedDuration = "0" . $detectedDuration;
+            }
+            $duration[$video->id] = $detectedDuration;
+        }
+
+        return view('front.home', compact('tags', 'videos', 'duration'));
     }
 }
