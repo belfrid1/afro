@@ -11,9 +11,10 @@ class Video extends Model
     use HasFactory;
     use Sluggable;
 
-    protected $fillable = ['videoTitle','video_file','trailer_file','thumbnail_file','tag_id','slug'];
+    protected $fillable = ['videoTitle', 'video_file', 'trailer_file', 'thumbnail_file', 'tag_id', 'slug', 'view_counter'];
 
-    public function popupgroup(){
+    public function popupgroup()
+    {
         return $this->belongsTo(PopupGroup::class);
     }
 }

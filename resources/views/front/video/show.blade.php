@@ -11,9 +11,10 @@
             <div class="row">
                 <div class="content-left mt-3 mb-3">
                     <div class="video-container">
-                        <video id="video" class="video-js vjs-16-9 vjs-big-play-centered vjs-sublime-skin"   preload="auto" controls  >
-                            <source  src="{{ asset($video->video_file) }}" type="video/mp4"  />
-                            <source  src="{{ asset($video->video_file) }}" type="video/ogg"  />
+                        <video id="video" class="video-js vjs-16-9 vjs-big-play-centered vjs-sublime-skin" preload="auto"
+                            controls>
+                            <source src="{{ asset($video->video_file) }}" type="video/mp4" />
+                            <source src="{{ asset($video->video_file) }}" type="video/ogg" />
                             <source src="{{ asset($video->video_file) }}" type="video/webm" />
                             <source src="{{ asset($video->video_file) }}" type="video/3gp" />
                             <source src="{{ asset($video->video_file) }}" type="video/avi" />
@@ -22,21 +23,23 @@
                             <source src="{{ asset($video->video_file) }}" type="video/mpeg" />
                             <source src="{{ asset($video->video_file) }}" type="video/mov" />
                             <source src="{{ asset($video->video_file) }}" type="video/flv" />
-                            <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that
+                            <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a
+                                web browser that
                                 <a href="{{ asset($video->video_file) }}" target="_blank">download the MP4</a>
                             </p>
                         </video>
                     </div>
 
 
-                
 
-                    <a id="video_download" href="{{ asset($video->video_file) }}" class="ad-size btn btn-succes btn-bold btn-xxs" >
+
+                    <a id="video_download" href="{{ asset($video->video_file) }}"
+                        class="ad-size btn btn-succes btn-bold btn-xxs">
                         <div class="content-center download mt-3">
                             <i class="fas fa-download"></i>
                             <p class="ad-size">Donwload</p>
                         </div>
-                    </a> 
+                    </a>
                     {{-- <div class="row mt-3">
                         <div class="col-12">
                             <div class="video-actions float-left ml-3">
@@ -74,22 +77,24 @@
                 <div class="float-left">
                     <h1>You might also like...</h1>
                 </div>
-                <div class="float-right well-action"> <a href="videos2359.html?o=mr"><span
-                            class="d-none d-sm-inline">Others Tag Videos</span><span class="d-xs-inline d-sm-none"><i
-                                class="fas fa-plus"></i></span></a> </div>
+                <div class="float-right well-action"> <a href="videos2359.html?o=mr"><span class="d-none d-sm-inline">Others
+                            Tag Videos</span><span class="d-xs-inline d-sm-none"><i class="fas fa-plus"></i></span></a>
+                </div>
                 <div class="clearfix"></div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="row content-row">
-                        @foreach($videos as $video)
+                        @foreach ($videos as $video)
                             <div class=" col-sm-6 col-md-4 col-lg-3  i-container">
-                                {{--                            <a href="{{route('video.show',$video)}}">--}}
-                                <a href="{{route('video.show',$video)}}">
+                                {{--                            <a href="{{route('video.show',$video)}}"> --}}
+                                <a href="{{ route('video.show', $video) }}">
                                     <div class="thumb-overlay" id="playvthumb_10676">
-                                        <img src="{{asset($video->thumbnail_file)}}" title="{{asset($video->videoTitle)}}" alt="{{ $video->videoTitle }}" class="img-responsive " />
+                                        <img src="{{ asset($video->thumbnail_file) }}"
+                                            title="{{ asset($video->videoTitle) }}" alt="{{ $video->videoTitle }}"
+                                            class="img-responsive " />
                                         <div class="duration">
-                                            <span class="hd-text-icon">HD</span> 00:00
+                                            <span class="hd-text-icon">HD</span> {{ $duration[$video->id] }}
                                         </div>
                                     </div>
                                 </a>
@@ -98,11 +103,11 @@
                                         <span class="content-title">{{ $video->videoTitle }}</span>
                                     </a>
                                     <div class="content-details">
-                                        <span class="content-views"> 0 views </span>
+                                        <span class="content-views"> {{ $video->view_counter }} views </span>
                                         <span class="content-rating">
-{{--                                        <i class="fas fa-thumbs-up"></i>--}}
+                                            {{--                                        <i class="fas fa-thumbs-up"></i> --}}
                                             <span>100% etoile</span>
-                                    </span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -112,17 +117,16 @@
             </div>
         </div>
 
-
+        <input type="hidden" id="incrementViewLink" value="{{ route('video.incrementView', $video->slug) }}" />
+        <input type="hidden" id="_token" value="{{ csrf_token() }}" />
 
     </div>
 
     <!--begin::Footer-->
     @include('layouts.front.footer')
     <!--end::Footer-->
-
 @endsection
 @section('javascripts')
-
     <script type="text/javascript">
         var lang_favoriting = "Favoriting...";
         var lang_posting = "Posting...";
@@ -130,28 +134,49 @@
         var video_height = "360";
         var evideo_vkey = "08345f7439f8ffabdffc";
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             var evdiv = $('.video-embedded');
             var ewidth = evdiv.width();
             eheight = Math.round(ewidth / 1.777);
             evdiv.css("height", eheight);
 
-            $(window).resize(function () {
+            $(window).resize(function() {
                 var evwidth = $('.video-embedded').width();
                 evheight = Math.round(evwidth / 1.777);
                 $('.video-embedded').css("height", evheight);
             });
+
+            let canCounterview = true;
+            document.getElementById("video_html5_api").addEventListener("playing", () => {
+                if (canCounterview) {
+                    canCounterview = false;
+                    $.ajax({
+                        method: 'post',
+                        url: $("#incrementViewLink").val(),
+                        dataType: 'json',
+                        data: {
+                            _token: $("#_token").val()
+                        },
+                        success: function(json) {
+                            console.log(json);
+                        }
+                    })
+                }
+            });
+            document.getElementById("video_html5_api").addEventListener("ended", () => {
+                canCounterview = true;
+            });
         });
     </script>
-{{--    <script type="text/javascript" src="{{asset('assets/js/jquery.comments.js')}}"></script>--}}
-{{--    <script type="text/javascript" src="{{asset('assets/js/jquery.voting.js')}}"></script>--}}
-{{--    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />--}}
+    {{--    <script type="text/javascript" src="{{asset('assets/js/jquery.comments.js')}}"></script> --}}
+    {{--    <script type="text/javascript" src="{{asset('assets/js/jquery.voting.js')}}"></script> --}}
+    {{--    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" /> --}}
 
     <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
 
 
-    <script src="{{asset('assets/js/video-js-events.js')}}"></script>
+    <script src="{{ asset('assets/js/video-js-events.js') }}"></script>
     <script>
         if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
             var msViewportStyle = document.createElement('style')
@@ -164,14 +189,11 @@
         }
 
         // get video duration
-
         var myPlayer = videojs('vemvo-player');
-
         if (myPlayer.readyState() < 1) {
             // wait for loadedmetdata event
             myPlayer.one("loadedmetadata", onLoadedMetadata);
-        }
-        else {
+        } else {
             // metadata already loaded
             onLoadedMetadata();
         }
@@ -181,8 +203,4 @@
             $('#duration').html("Duration: " + myPlayer.duration());
         }
     </script>
-
-
-
-
 @endsection

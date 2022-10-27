@@ -134,19 +134,27 @@ class VideoController extends Controller
             return  redirect('/register');
         }
 
-        if ($user->payment_status == true) {
-            $tags = Tag::all();
-            $videos = Video::all();
-            $video = Video::where('slug', $slug)->first();
+        $tags = Tag::all();
+        $videos = Video::all();
+        $video = Video::where('slug', $slug)->first();
 
-            return view('front.video.show', compact('videos', 'tags', 'video'));
+        // Video local path
+        $dirname = dirname(__FILE__, 4);
+        // Determination de la durée de chaque video
+        foreach ($videos as $video) {
+            $getID3 = new \getID3;
+            $detectedDuration = $getID3->analyze($dirname . "/public/" . $video->video_file)["playtime_string"];
+            if (strpos($detectedDuration, ":") !== false && strlen($detectedDuration) % 3 == 1) {
+                $detectedDuration = "0" . $detectedDuration;
+            }
+            $duration[$video->id] = $detectedDuration;
+        }
+
+        if ($user->payment_status == true) {
+            return view('front.video.show', compact('videos', 'tags', 'video', 'duration'));
         } else {
             if ($user->role == 'admin') {
-                $tags = Tag::all();
-                $videos = Video::all();
-                $video = Video::where('slug', $slug)->first();
-
-                return view('front.video.show', compact('videos', 'tags', 'video'));
+                return view('front.video.show', compact('videos', 'tags', 'video', 'duration'));
             } else {
                 return  redirect('/register');
             }
@@ -262,21 +270,34 @@ class VideoController extends Controller
         $videoToDelete->delete();
 
         $videoFile  = $video->video_file;
-        $traillerFile = $video->trailer_file ;
+        $traillerFile = $video->trailer_file;
         $thumbnailFile = $video->thumbnail_file;
 
-       
+
         if (file_exists($videoFile)) {
             unlink($videoFile);
-         }
-         if (file_exists($traillerFile)) {
+        }
+        if (file_exists($traillerFile)) {
             unlink($traillerFile);
-         }
-         if (file_exists($thumbnailFile)) {
+        }
+        if (file_exists($thumbnailFile)) {
             unlink($thumbnailFile);
-         }
+        }
 
         // Redirection route "posts.index"
         return redirect()->back()->with(['success' => "Deletion successfully completed"]);
+    }
+
+
+    /**
+     * Increment video View
+     */
+    public function incrementView($slug)
+    {
+        $targetVideo = Video::where(["slug" => $slug]);
+        if ($targetVideo->count() > 0) {
+            $newViewCount = $targetVideo->first()->view_counter + 1;
+            $targetVideo->update(["view_counter" => $newViewCount]);
+        }
     }
 }

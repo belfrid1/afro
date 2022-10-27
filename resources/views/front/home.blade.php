@@ -36,7 +36,7 @@
                                                 title="{{ asset($video->videoTitle) }}" alt="{{ $video->videoTitle }}"
                                                 class="img-responsive " />
                                             <div class="duration">
-                                                <span class="hd-text-icon">HD</span> 04:12
+                                                <span class="hd-text-icon">HD</span> {{ $duration[$video->id] }}
                                             </div>
                                         </div>
                                         <video class="playVideo_bloc_video" preload="none" muted loop
@@ -80,8 +80,7 @@
                                                 </circle>
                                                 <circle cx="84" cy="50" r="10" fill="#ffffff">
                                                     <animate attributeName="r" repeatCount="indefinite" dur="1s"
-                                                        calcMode="spline" keyTimes="0;0.25;0.5;0.75;1"
-                                                        values="0;0;10;10;10"
+                                                        calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10"
                                                         keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
                                                         begin="-0.5s"></animate>
                                                     <animate attributeName="cx" repeatCount="indefinite" dur="1s"
@@ -112,7 +111,7 @@
                                         <span class="content-title">{{ $video->videoTitle }}</span>
                                     </a>
                                     <div class="content-details">
-                                        <span class="content-views"> 0 views</span>
+                                        <span class="content-views">{{ $video->view_counter }} views</span>
                                         <span class="content-rating">
                                             <i class="fas fa-thumbs-up"></i>
                                             <span>100%</span>

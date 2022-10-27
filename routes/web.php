@@ -14,15 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 //paypal route
-Route::post('pay',[\App\Http\Controllers\PaymentController::class,'pay'])->name('payment');
-Route::get('success',[\App\Http\Controllers\PaymentController::class,'success']);
-Route::get('error',[\App\Http\Controllers\PaymentController::class,'error']);
+Route::post('pay', [\App\Http\Controllers\PaymentController::class, 'pay'])->name('payment');
+Route::get('success', [\App\Http\Controllers\PaymentController::class, 'success']);
+Route::get('error', [\App\Http\Controllers\PaymentController::class, 'error']);
 
 
 
 //Route::Auth();
-Route::group(['namespace' => 'App\Http\Controllers'], function()
-{
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
     /**
      * Home Routes
      */
@@ -34,14 +33,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
 
 
-// tag route
+    // tag route
 
     Route::resource('tag', 'TagController');
     Route::post('/tag/update/{tag}', 'TagController@update')->name('tag.update');
     Route::get('/tag/delete/{tag}', 'TagController@destroy')->name('tag.delete');
 
 
-//    Route::post('/subscriber/register', 'Register@showRegistrationForm')->name('subscriber.register');
+    //    Route::post('/subscriber/register', 'Register@showRegistrationForm')->name('subscriber.register');
 
 
 
@@ -50,34 +49,36 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::post('/video/update/{video}', 'VideoController@update')->name('video.update');
     Route::get('/video/delete/{video}', 'VideoController@destroy')->name('video.delete');
     Route::get('/video/show/{slug}', 'VideoController@show')->name('video.show');
+    Route::post('/video/{slug}/increment_view', 'VideoController@incrementView')->name('video.incrementView');
 
 
 
-    Route::group(['middleware' => ['guest']], function() {
+
+    Route::group(['middleware' => ['guest']], function () {
         /**
          * Register Routes
          */
-//        Route::get('/register', 'RegisterController@show')->name('register.show');
-//        Route::post('/register', 'RegisterController@register')->name('register.perform');
+        //        Route::get('/register', 'RegisterController@show')->name('register.show');
+        //        Route::post('/register', 'RegisterController@register')->name('register.perform');
 
         /**
          * Login Routes
          */
-//        Route::get('/login', 'Auth\LoginController@show')->name('login.show');
-//        Route::post('/login', 'Auth\LoginController@login')->name('login.perform');
+        //        Route::get('/login', 'Auth\LoginController@show')->name('login.show');
+        //        Route::post('/login', 'Auth\LoginController@login')->name('login.perform');
 
     });
 
-    Route::group(['middleware' => ['auth', 'permission']], function() {
+    Route::group(['middleware' => ['auth', 'permission']], function () {
         /**
          * Logout Routes
          */
-//        Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
+        //        Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
 
         /**
          * User Routes
          */
-        Route::group(['prefix' => 'users'], function() {
+        Route::group(['prefix' => 'users'], function () {
             Route::get('/', 'UsersController@index')->name('users.index');
             Route::get('/create', 'UsersController@create')->name('users.create');
             Route::post('/create', 'UsersController@store')->name('users.store');
