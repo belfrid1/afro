@@ -533,7 +533,7 @@
                                                                             <!--end::Svg Icon-->
                                                                         </a>
 
-                                                                        <a href="{{ route('video.delete', $video->id) }}"
+                                                                        <a href="{{ route('video.delete', $video) }}"
                                                                             class="btn btn-icon btn-bg-light btn-active-color-danger "
                                                                             data-toggle="tooltip" data-placement="top"
                                                                             title="delete"

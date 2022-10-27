@@ -256,8 +256,26 @@ class VideoController extends Controller
      */
     public function destroy(Video $video)
     {
+
+        //dd($video);
         $videoToDelete = Video::find($video->id);
         $videoToDelete->delete();
+
+        $videoFile  = $video->video_file;
+        $traillerFile = $video->trailer_file ;
+        $thumbnailFile = $video->thumbnail_file;
+
+       
+        if (file_exists($videoFile)) {
+            unlink($videoFile);
+         }
+         if (file_exists($traillerFile)) {
+            unlink($traillerFile);
+         }
+         if (file_exists($thumbnailFile)) {
+            unlink($thumbnailFile);
+         }
+
         // Redirection route "posts.index"
         return redirect()->back()->with(['success' => "Deletion successfully completed"]);
     }
