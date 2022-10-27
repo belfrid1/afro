@@ -345,7 +345,7 @@
                                                                 </label>
                                                                 <!--end::Label-->
                                                                 <!--begin::Input-->
-                                                                <input type="file" accept="video/*"
+                                                                <input type="file"
                                                                     value="{{ old('video_file') }}" class="form-control"
                                                                     id="" name="video_file"
                                                                     placeholder="video name" required>
@@ -372,7 +372,7 @@
                                                                 </label>
                                                                 <!--end::Label-->
                                                                 <!--begin::Input-->
-                                                                <input type="file" accept="video/*"
+                                                                <input type="file" 
                                                                     value="{{ old('trailer') }}" class="form-control"
                                                                     id="" name="trailer_file"
                                                                     placeholder="Trailer" required>
