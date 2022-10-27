@@ -50,6 +50,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::post('/video/update/{video}', 'VideoController@update')->name('video.update');
     Route::get('/video/delete/{video}', 'VideoController@destroy')->name('video.delete');
     Route::get('/video/show/{slug}', 'VideoController@show')->name('video.show');
+    Route::get('/video/trailler/{slug}', 'VideoController@showTrailler')->name('video.show.trailler');
 
 
 

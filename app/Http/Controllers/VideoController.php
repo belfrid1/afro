@@ -123,7 +123,7 @@ class VideoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Video  $video
+     * @param  \App\Models\Video  $video showTrailler
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
@@ -151,6 +151,16 @@ class VideoController extends Controller
                 return  redirect('/register');
             }
         }
+    }
+
+   
+    public function showTrailler($slug)
+    {
+        $tags = Tag::all();
+        $videos = Video::all();
+        $video = Video::where('slug', $slug)->first();
+
+        return view('front.video.showTrailler', compact('videos', 'tags', 'video'));
     }
 
     /**

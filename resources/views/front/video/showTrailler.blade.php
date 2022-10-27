@@ -12,27 +12,27 @@
                 <div class="content-left mt-3 mb-3">
                     <div class="video-container">
                         <video id="video" class="video-js vjs-16-9 vjs-big-play-centered vjs-sublime-skin"   preload="auto" controls  >
-                            <source  src="{{ asset($video->video_file) }}" type="video/mp4"  />
-                            <source  src="{{ asset($video->video_file) }}" type="video/ogg"  />
-                            <source src="{{ asset($video->video_file) }}" type="video/webm" />
-                            <source src="{{ asset($video->video_file) }}" type="video/3gp" />
-                            <source src="{{ asset($video->video_file) }}" type="video/avi" />
-                            <source src="{{ asset($video->video_file) }}" type="video/mpg" />
-                            <source src="{{ asset($video->video_file) }}" type="video/wmv" />
-                            <source src="{{ asset($video->video_file) }}" type="video/mpeg" />
-                            <source src="{{ asset($video->video_file) }}" type="video/mov" />
-                            <source src="{{ asset($video->video_file) }}" type="video/flv" />
+                            <source  src="{{ asset($video->trailer_file) }}" type="video/mp4"  />
+                            <source  src="{{ asset($video->trailer_file) }}" type="video/ogg"  />
+                            <source src="{{ asset($video->trailer_file) }}" type="video/webm" />
+                            <source src="{{ asset($video->trailer_file) }}" type="video/3gp" />
+                            <source src="{{ asset($video->trailer_file) }}" type="video/avi" />
+                            <source src="{{ asset($video->trailer_file) }}" type="video/mpg" />
+                            <source src="{{ asset($video->trailer_file) }}" type="video/wmv" />
+                            <source src="{{ asset($video->trailer_file) }}" type="video/mpeg" />
+                            <source src="{{ asset($video->trailer_file) }}" type="video/mov" />
+                            <source src="{{ asset($video->trailer_file) }}" type="video/flv" />
                             <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that
                                 <a href="{{ asset($video->video_file) }}" target="_blank">download the MP4</a>
                             </p>
                         </video>
                     </div>
-                    <a id="video_download" href="{{ asset($video->video_file) }}" class="ad-size btn btn-succes btn-bold btn-xxs" >
+                    {{-- <a id="video_download" href="{{ asset($video->video_file) }}" class="ad-size btn btn-succes btn-bold btn-xxs" >
                         <div class="content-center download mt-3">
                             <i class="fas fa-download"></i>
                             <p class="ad-size">Donwload</p>
                         </div>
-                    </a> 
+                    </a>  --}}
                     {{-- <div class="row mt-3">
                         <div class="col-12">
                             <div class="video-actions float-left ml-3">
@@ -57,11 +57,31 @@
                     </div> --}}
                 </div>
                 <div class="content-center mt-3 mb-3">
-                    <div class="ad-body" style="width:300px;">
-                        <p class="ad-title"><span>SPONSORS</span><span class="ad-group">VIDEO RIGHT</span></p>
-                        <p class="ad-size">300 &times; Auto</p>
-                    </div>
-                    <div class="clearfix"></div>
+                    @if(auth()->user())
+                        <div class="ad-body btn btn-succes btn-bold btn-xxs" style="width:300px;">
+                            <a id="video_download" href="{{ asset($video->video_file) }}" class="ad-size" > 
+                            <span class="ad-size">Download Full </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                              </svg>
+                        </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    @else
+                        <div class="ad-body btn btn-succes btn-bold btn-xxs" style="width:300px;">
+                            <a id="video_download" href="{{ route('register') }}" class="ad-size" >
+                            <span class="ad-size">Download Full </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                              </svg>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    @endif
+
+                        
                 </div>
             </div>
 
@@ -70,9 +90,10 @@
                 <div class="float-left">
                     <h1>You might also like...</h1>
                 </div>
-                <div class="float-right well-action"> <a href="videos2359.html?o=mr"><span
+                {{-- <div class="float-right well-action"> <a href="videos2359.html?o=mr"><span
                             class="d-none d-sm-inline">Others Tag Videos</span><span class="d-xs-inline d-sm-none"><i
-                                class="fas fa-plus"></i></span></a> </div>
+                                class="fas fa-plus"></i></span></a> 
+                            </div> --}}
                 <div class="clearfix"></div>
             </div>
             <div class="row">

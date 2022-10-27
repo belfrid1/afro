@@ -24,10 +24,6 @@
                         <!--begin::  show video-->
                         @foreach ($videos as $video)
                             <div class="col-sm-6 col-md-4 col-lg-4">
-                                {{--                                <video width="320" height="240" controls> --}}
-                                {{--                                    <source src="{{URL::asset("$video->video_file")}}" type="video/mp4"> --}}
-                                {{--                                    Your browser does not support the video tag. --}}
-                                {{--                                </video> --}}
                                 <a href="{{ route('video.show', $video) }}">
                                     <div class="thumb-overlay playVideo_bloc" data-ref="{{ $video->id }}"
                                         style="position: relative">
@@ -116,6 +112,10 @@
                                         <span class="content-rating">
                                             <i class="fas fa-thumbs-up"></i>
                                             <span>100%</span>
+                                        </span>
+                                        <span class="content-rating">
+                                           <a href="{{ route('video.show.trailler', $video) }}" class="btn btn-secondary" type="button"> <span>Play trailler >>  <i class="fas fa"></i></span></a>
+                                           
                                         </span>
                                     </div>
                                 </div>
