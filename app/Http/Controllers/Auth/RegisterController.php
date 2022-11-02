@@ -115,7 +115,7 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $tags = Tag::all();
-        $videos = Video::All();
+        $videos = Video::orderBy('id', 'desc')->get()->take(12);
         return view('auth.front.register', compact('tags', 'videos'));
     }
 }

@@ -189,7 +189,7 @@ class VideoController extends Controller
         }
 
         $tags = Tag::all();
-        $videos = Video::all();
+        $videos = Video::orderBy('id', 'desc')->get()->take(56);
         $vid = Video::where('slug', $slug)->first();
 
         if ($user->payment_status == true) {
@@ -207,7 +207,7 @@ class VideoController extends Controller
     public function showTrailler($slug)
     {
         $tags = Tag::all();
-        $videos = Video::all();
+        $videos = Video::orderBy('id', 'desc')->get()->take(56);
         $video = Video::where('slug', $slug)->first();
 
         return view('front.video.showTrailler', compact('videos', 'tags', 'video'));

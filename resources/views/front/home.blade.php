@@ -107,11 +107,11 @@
                                         <span class="content-title">{{ $video->videoTitle }}</span>
                                     </a>
                                     <div class="content-details">
-                                        <span class="content-views">{{ $video->view_counter }} views</span>
+                                        {{-- <span class="content-views">{{ $video->view_counter }} views</span>
                                         <span class="content-rating">
                                             <i class="fas fa-thumbs-up"></i>
                                             <span>100%</span>
-                                        </span>
+                                        </span> --}}
                                         <span class="content-rating">
                                            <a href="{{ route('video.show.trailler', $video) }}" class="btn btn-secondary" type="button"> <span>Play trailler >>  <i class="fas fa"></i></span></a>
                                            

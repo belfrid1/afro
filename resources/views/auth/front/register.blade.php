@@ -162,8 +162,8 @@
             <div class="float-left">
                 <h1>You might also like...</h1>
             </div>
-            <div class="float-right well-action"> <a href="videos2359.html?o=mr"><span class="d-none d-sm-inline">Others
-                        Tag Videos</span><span class="d-xs-inline d-sm-none"><i class="fas fa-plus"></i></span></a> </div>
+            {{-- <div class="float-right well-action"> <a href="videos2359.html?o=mr"><span class="d-none d-sm-inline">Others
+                        Tag Videos</span><span class="d-xs-inline d-sm-none"><i class="fas fa-plus"></i></span></a> </div> --}}
             <div class="clearfix"></div>
         </div>
         <div class="row">
@@ -177,9 +177,9 @@
                                     <img src="{{ asset($video->thumbnail_file) }}"
                                         title="{{ asset($video->videoTitle) }}" alt="{{ $video->videoTitle }}"
                                         class="img-responsive " />
-                                    <div class="duration">
-                                        <span class="hd-text-icon">HD</span> 00:00
-                                    </div>
+                                        <div class="duration">
+                                            <span class="hd-text-icon">HD</span> {{ $video->video_duration ?? '' }}
+                                        </div>
                                 </div>
                             </a>
                             <div class="content-info">
@@ -187,11 +187,15 @@
                                     <span class="content-title">{{ $video->videoTitle }}</span>
                                 </a>
                                 <div class="content-details">
-                                    <span class="content-views"> 0 views </span>
+                                    {{-- <span class="content-views"> 0 views </span>
                                     <span class="content-rating">
-                                        {{--                                        <i class="fas fa-thumbs-up"></i> --}}
+                                        <i class="fas fa-thumbs-up"></i>
                                         <span>100% etoile</span>
-                                    </span>
+                                    </span> --}}
+                                    <span class="content-rating">
+                                        <a href="{{ route('video.show.trailler', $video) }}" class="btn btn-secondary" type="button"> <span>Play trailler >>  <i class="fas fa"></i></span></a>
+                                        
+                                     </span>
                                 </div>
                             </div>
                         </div>

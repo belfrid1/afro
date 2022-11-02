@@ -113,7 +113,7 @@
                                     <div class="thumb-overlay" id="playvthumb_10676">
                                         <img src="{{asset($video->thumbnail_file)}}" title="{{asset($video->videoTitle)}}" alt="{{ $video->videoTitle }}" class="img-responsive " />
                                         <div class="duration">
-                                            <span class="hd-text-icon">HD</span> 00:00
+                                            <span class="hd-text-icon">HD</span> {{ $video->video_duration ?? '' }}
                                         </div>
                                     </div>
                                 </a>
@@ -122,11 +122,14 @@
                                         <span class="content-title">{{ $video->videoTitle }}</span>
                                     </a>
                                     <div class="content-details">
-                                        <span class="content-views"> 0 views </span>
+                                        {{-- <span class="content-views"> 0 views </span>
                                         <span class="content-rating">
-{{--                                        <i class="fas fa-thumbs-up"></i>--}}
-                                            <span>100% etoile</span>
-                                    </span>
+                                       <i class="fas fa-thumbs-up"></i>
+                                            <span>100% etoile</span></span> --}}
+                                            <span class="content-rating">
+                                                <a href="{{ route('video.show.trailler', $video) }}" class="btn btn-secondary" type="button"> <span>Play trailler >>  <i class="fas fa"></i></span></a>
+                                                
+                                             </span>
                                     </div>
                                 </div>
                             </div>
