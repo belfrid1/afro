@@ -723,7 +723,7 @@
                         $('#kt_video_uplaod_loder').hide();
                         console.log('File has uploaded');
                         console.log(xhr);
-                        // location.href = location.href;
+                        location.href = location.href;
                     }
                 });
             });
