@@ -32,7 +32,7 @@
                                                 title="{{ asset($video->videoTitle) }}" alt="{{ $video->videoTitle }}"
                                                 class="img-responsive " />
                                             <div class="duration">
-                                                <span class="hd-text-icon">HD</span> {{ $duration[$video->id] }}
+                                                <span class="hd-text-icon">HD</span> {{ $video->video_duration ?? '' }}
                                             </div>
                                         </div>
                                         <video class="playVideo_bloc_video" preload="none" muted loop

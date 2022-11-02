@@ -6,30 +6,31 @@
     <div id="wrapper">
         <div class="container mt-3 mb-3">
             <div class="well-filters">
-                <h1>{{ $video->videoTitle }}</h1>
+                <h1>{{ $vid->videoTitle }}</h1>
             </div>
+            
             <div class="row">
                 <div class="content-left mt-3 mb-3">
                     <div class="video-container">
                         <video id="video" class="video-js vjs-16-9 vjs-big-play-centered vjs-sublime-skin" preload="auto"
                             controls>
-                            <source src="{{ asset($video->video_file) }}" type="video/mp4" />
-                            <source src="{{ asset($video->video_file) }}" type="video/ogg" />
-                            <source src="{{ asset($video->video_file) }}" type="video/webm" />
-                            <source src="{{ asset($video->video_file) }}" type="video/3gp" />
-                            <source src="{{ asset($video->video_file) }}" type="video/avi" />
-                            <source src="{{ asset($video->video_file) }}" type="video/mpg" />
-                            <source src="{{ asset($video->video_file) }}" type="video/wmv" />
-                            <source src="{{ asset($video->video_file) }}" type="video/mpeg" />
-                            <source src="{{ asset($video->video_file) }}" type="video/mov" />
-                            <source src="{{ asset($video->video_file) }}" type="video/flv" />
+                            <source src="{{ asset($vid->video_file) }}" type="video/mp4" />
+                            <source src="{{ asset($vid->video_file) }}" type="video/ogg" />
+                            <source src="{{ asset($vid->video_file) }}" type="video/webm" />
+                            <source src="{{ asset($vid->video_file) }}" type="video/3gp" />
+                            <source src="{{ asset($vid->video_file) }}" type="video/avi" />
+                            <source src="{{ asset($vid->video_file) }}" type="video/mpg" />
+                            <source src="{{ asset($vid->video_file) }}" type="video/wmv" />
+                            <source src="{{ asset($vid->video_file) }}" type="video/mpeg" />
+                            <source src="{{ asset($vid->video_file) }}" type="video/mov" />
+                            <source src="{{ asset($vid->video_file) }}" type="video/flv" />
                             <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a
                                 web browser that
-                                <a href="{{ asset($video->video_file) }}" target="_blank">download the MP4</a>
+                                <a href="{{ asset($vid->video_file) }}" target="_blank">download the MP4</a>
                             </p>
                         </video>
                     </div>
-                    <a id="video_download" href="{{ asset($video->video_file) }}" class="ad-size btn btn-succes btn-bold btn-xxs" >
+                    <a id="video_download" href="{{ asset($vid->video_file) }}" class="ad-size btn btn-succes btn-bold btn-xxs" >
                         <div class="content-center download mt-3">
                             <i class="fas fa-download"></i>
                             <p class="ad-size">Donwload</p>
@@ -89,7 +90,7 @@
                                             title="{{ asset($video->videoTitle) }}" alt="{{ $video->videoTitle }}"
                                             class="img-responsive " />
                                         <div class="duration">
-                                            <span class="hd-text-icon">HD</span> {{ $duration[$video->id] }}
+                                            <span class="hd-text-icon">HD</span> {{ $video->duration ?? '' }}
                                         </div>
                                     </div>
                                 </a>
@@ -112,7 +113,7 @@
             </div>
         </div>
 
-        <input type="hidden" id="incrementViewLink" value="{{ route('video.incrementView', $video->slug) }}" />
+        <input type="hidden" id="incrementViewLink" value="{{ route('video.incrementView', $vid->slug) }}" />
         <input type="hidden" id="_token" value="{{ csrf_token() }}" />
 
     </div>

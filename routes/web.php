@@ -52,6 +52,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/video/trailler/{slug}', 'VideoController@showTrailler')->name('video.show.trailler');
     Route::post('/video/{slug}/increment_view', 'VideoController@incrementView')->name('video.incrementView');
 
+    // save video with dropzone form 
+    Route::get('/dropzone', 'VideoController@dropzoneIndex')->name('video.dropzone.index'); 
+    // upload file step
+    Route::post('/upload/large', 'VideoController@uploadLargeFiles')->name('upload.large.files');
+
+
 
 
 

@@ -194,7 +194,21 @@
                                         <div class="table-responsive">
                                             <!--begin::Content-->
                                             <div class="flex-row-fluid py-lg-5 px-lg-15">
+                                                <!--begin::Form--> 
                                                 <!--begin::Form-->
+                                                <form id="upload-form" class="dropzone">
+                                                    <!-- this is were the previews should be shown. -->
+                                                    <div class="previews"></div>
+                                                    
+                                                    <!-- Now setup your input fields -->
+                                                    <input type="email" name="username" />
+                                                    <input type="password" name="password" />
+                                                  
+                                                    <button type="submit">Submit data and files!</button>
+                                                  </form>
+                                                <!--begin::Form-->
+
+
                                                 <form class="form" id="fileUploadForm" enctype="multipart/form-data" method="post" action="{{ route('video.store') }}">
                                                     @csrf
                                                     <!--begin::Modal - progress bar -->
@@ -352,6 +366,7 @@
                                                     </div>
 
                                                     <!--end::Step 2-->
+                                                   
 
 
                                                     <!--begin::Step 3-->
@@ -379,8 +394,6 @@
                                                         </div>
                                                     </div>
                                                     <!--end::Step 3--> 
-
-                        
 
                                                     <!--begin::Step 3-->
                                                     <div class="current" data-kt-stepper-element="content">
@@ -692,9 +705,10 @@
     {{--    progress bar star --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/resumablejs@1.1.0/resumable.min.js"></script>
 
     {{-- old progress bar  --}}
-     <script type="text/javascript">
+     {{-- <script type="text/javascript">
         $(function() {
             $(document).ready(function() {
                 var percentage = '0';
@@ -722,14 +736,57 @@
                         $('#kt_inprogress').hide();
                         $('#kt_video_uplaod_loder').hide();
                         console.log('File has uploaded');
-                        console.log(xhr);
-                        // location.href = location.href;
+                        location.href = location.href;
                     }
                 });
             });
         });
-    </script>
+    </script> --}}
     {{--    progress bar end --}}
+
+        {{-- uploda with dropzone  --}} 
+
+        <script type="text/javascript">
+           Dropzone.options.uploadForm = { // The camelized version of the ID of the form element
+
+// The configuration we've talked about above
+autoProcessQueue: false,
+uploadMultiple: true,
+parallelUploads: 100,
+maxFiles: 100,
+
+// The setting up of the dropzone
+init: function() {
+  var myDropzone = this;
+
+  // First change the button to actually tell Dropzone to process the queue.
+  this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+    // Make sure that the form isn't actually being sent.
+    e.preventDefault();
+    e.stopPropagation();
+    myDropzone.processQueue();
+  });
+
+  // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
+  // of the sending event because uploadMultiple is set to true.
+  this.on("sendingmultiple", function() {
+    // Gets triggered when the form is actually being sent.
+    // Hide the success button or the complete form.
+  });
+  this.on("successmultiple", function(files, response) {
+    // Gets triggered when the files have successfully been sent.
+    // Redirect user or notify of success.
+  });
+  this.on("errormultiple", function(files, response) {
+    // Gets triggered when there was an error sending the files.
+    // Maybe show form again, and notify user of error
+  });
+}
+
+}
+        </script>        
+        {{-- uploda with dropzone  --}}
+
 
 
 {{--    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>--}}

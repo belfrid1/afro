@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
 class VideoController extends Controller
 {
@@ -24,6 +26,16 @@ class VideoController extends Controller
         $tags = Tag::all();
 
         return view('back.video.index', compact('videos', 'tags'));
+    }
+
+    
+    public function dropzoneIndex()
+    {
+
+        $videos = Video::all();
+        $tags = Tag::all();
+
+        return view('back.video.dropzone_index', compact('videos', 'tags'));
     }
 
     /**
@@ -43,7 +55,7 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-
+       
         $uploadPath = 'uploads';
 
         if (!File::isDirectory($uploadPath)) {
@@ -88,6 +100,10 @@ class VideoController extends Controller
             $thumbnailFile = Image::make($thumbnailFile)->resize(320, 240)->save($uploadPath . '/thumb/' . $filenameThumbnail);
             //           $thumbnailFile =  $thumbnailFile->move($uploadPath.'/thumb', $filenameThumbnail);
 
+        
+            // get duration 
+           
+             $durationVideo =  $this->getDuration($fullPathVideo);
             // save picture into folder
             //            return $file->move($path, $filename);
 
@@ -98,8 +114,10 @@ class VideoController extends Controller
                     'trailer_file' => $fullPathTrailer,
                     'thumbnail_file' => $fullPathThumbnail,
                     'tag_id' => $request->tag_id,
+                    'video_duration' => $durationVideo,
                 ]
             );
+
             if (!$video) {
                 return back()->with(['error' => "unable to record video"]);
             }
@@ -120,6 +138,41 @@ class VideoController extends Controller
             ->with(['success' => "video created successfully."]);
     }
 
+    public function uploadLargeFiles(Request $request) 
+    {
+        $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
+    
+        if (!$receiver->isUploaded()) {
+            // file not uploaded
+        }
+    
+        $fileReceived = $receiver->receive(); // receive file
+        if ($fileReceived->isFinished()) { // file uploading is complete / all chunks are uploaded
+            $file = $fileReceived->getFile(); // get file
+            $extension = $file->getClientOriginalExtension();
+            $fileName = str_replace('.'.$extension, '', $file->getClientOriginalName()); //file name without extenstion
+            $fileName .= '_' . md5(time()) . '.' . $extension; // a unique file name
+    
+            $disk = Storage::disk(config('filesystems.default'));
+            $path = $disk->putFileAs('videos', $file, $fileName);
+          
+    
+            // delete chunked file
+            unlink($file->getPathname());
+            return [
+                'path' => asset('storage/' . $path),
+                'filename' => $fileName
+            ];
+        }
+    
+        // otherwise return percentage information
+        $handler = $fileReceived->handler();
+        return [
+            'done' => $handler->getPercentageDone(),
+            'status' => true
+        ];
+    }
+
     /**
      * Display the specified resource.
      *
@@ -128,6 +181,7 @@ class VideoController extends Controller
      */
     public function show($slug)
     {
+       
         $user = Auth::user();
         // no auth user
         if (!$user) {
@@ -136,32 +190,20 @@ class VideoController extends Controller
 
         $tags = Tag::all();
         $videos = Video::all();
-        $video = Video::where('slug', $slug)->first();
-
-        // Video local path
-        $dirname = dirname(__FILE__, 4);
-        // Determination de la durée de chaque video
-        foreach ($videos as $video) {
-            $getID3 = new \getID3;
-            $detectedDuration = $getID3->analyze($dirname . "/public/" . $video->video_file)["playtime_string"];
-            if (strpos($detectedDuration, ":") !== false && strlen($detectedDuration) % 3 == 1) {
-                $detectedDuration = "0" . $detectedDuration;
-            }
-            $duration[$video->id] = $detectedDuration;
-        }
+        $vid = Video::where('slug', $slug)->first();
 
         if ($user->payment_status == true) {
-            return view('front.video.show', compact('videos', 'tags', 'video', 'duration'));
+            return view('front.video.show', compact('videos', 'tags', 'vid' ));
         } else {
             if ($user->role == 'admin') {
-                return view('front.video.show', compact('videos', 'tags', 'video', 'duration'));
+                return view('front.video.show', compact('videos', 'tags', 'vid'));
             } else {
                 return  redirect('/register');
             }
         }
     }
 
-   
+
     public function showTrailler($slug)
     {
         $tags = Tag::all();
@@ -310,4 +352,20 @@ class VideoController extends Controller
             $targetVideo->update(["view_counter" => $newViewCount]);
         }
     }
+
+    private function getDuration($pathfile){
+
+         // Video local path
+         $dirname = dirname(__FILE__, 4);
+         // Determination de la durée de chaque video
+        
+        $getID3 = new \getID3;
+        $detectedDuration = $getID3->analyze($dirname . "/public/" . $pathfile)["playtime_string"];
+        if (strpos($detectedDuration, ":") !== false && strlen($detectedDuration) % 3 == 1) {
+            $detectedDuration = "0" . $detectedDuration;
+        }
+    
+         return $detectedDuration;
+    }
+  
 }
