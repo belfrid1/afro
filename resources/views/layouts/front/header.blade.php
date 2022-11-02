@@ -4,7 +4,7 @@
     <div class="top-nav">
         <div class="container">
             <div class="top-menu">
-                <div class="float-left"> <a class="top-brand" href="#"><img src="{{asset('assets/img/logo/Channel Cover Photo afrosexxx.jpg')}}"
+                <div class="float-left"> <a class="top-brand" href="/"><img src="{{asset('assets/img/logo_afrosexxx.png')}}"
                                                                             alt="Afrosexxx"></a> </div>
                 <div class="search-top-container mx-auto d-none d-md-inline-block">
                     {{--                    <form class="form-inline" name="search" id="search_form" method="post"--}}

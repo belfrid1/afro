@@ -126,11 +126,20 @@
                     </div>
                 </div>
                 <div class="content-right">
-                    <div class="ad-body" style="width:300px; height:300px;">
-                        <p class="ad-title"><span>SPONSORS</span><span class="ad-group">INDEX RIGHT</span></p>
-                        <p class="ad-size">300 &times; 300</p>
-                    </div>
+                    <img style="width:300px; height:300px; width: 300px;height: 300px; padding-left: inherit;margin-bottom: 20px;"  src="{{ asset('assets/img/ebony.png') }}" alt="">
+                    {{-- <div class="ad-body" style="width:300px; height:300px;"> --}}
+                       
+                        {{-- <p class="ad-title"><span>SPONSORS</span><span class="ad-group">INDEX RIGHT</span></p>
+                        <p class="ad-size">300 &times; 300</p> --}}
+                    {{-- </div> --}}
                 </div>
+            </div>
+            <div class="content-center justify-content-center">
+                <img class="" style="width: -moz-available;" src="{{ asset('assets/img/Channel Cover  bigassdoll.jpg') }}" alt="">
+            
+                {{-- <p class="ad-title"><span>SPONSORS</span><span class="ad-group">INDEX BOTTOM</span></p> 
+                
+                <p class="ad-size"> </p> --}}
             </div>
             <div class="well-filters mb-3">
                 <div class="float-left">
@@ -142,6 +151,8 @@
                 </div> --}}
                 <div class="clearfix"></div>
             </div>
+
+            
             <div class="row">
                 <div class="col-sm-12">
                     <div class="row content-row">
@@ -173,10 +184,7 @@
                     </div>
                 </div>
             </div>
-            <div class="ad-body">
-                <p class="ad-title"><span>SPONSORS</span><span class="ad-group">INDEX BOTTOM</span></p>
-                <p class="ad-size">Auto &times; Auto</p>
-            </div>
+            
         </div>
 
     </div>

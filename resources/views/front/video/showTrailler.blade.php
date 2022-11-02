@@ -83,8 +83,15 @@
 
                         
                 </div>
+                
             </div>
-
+            <div class="content-center justify-content-center">
+                <img class="" style="width: -moz-available;" src="{{ asset('assets/img/cover bigassdoll.jpg') }}" alt="">
+            
+                {{-- <p class="ad-title"><span>SPONSORS</span><span class="ad-group">INDEX BOTTOM</span></p> 
+                
+                <p class="ad-size"> </p> --}}
+            </div>
 
             <div class="well-filters mb-3">
                 <div class="float-left">
