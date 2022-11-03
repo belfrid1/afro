@@ -132,9 +132,9 @@
                                             <!-- start tag     -->
                                             <div class="popular-tag">
                                                 <span>
-                                                    <span class="tag-counter">{{$tag->id}}</span>
-                                                    <i class="fas fa-search"></i>
-                                                    <a href="#" title="filmbluray">{{ $tag->tagName }}</a>
+                                                    {{-- <span class="tag-counter">{{$tag->id}}</span> --}}
+                                                    {{-- <i class="fas fa-search"></i> --}}
+                                                    <a href="{{ route('show.video.tag', $tag->id) }}" title="{{ $tag->tagName }}">{{ $tag->tagName }}</a>
                                                 </span>
                                             </div>
                                             <!-- end  tag   -->

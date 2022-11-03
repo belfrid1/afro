@@ -353,6 +353,8 @@ class VideoController extends Controller
         }
     }
 
+    
+
     private function getDuration($pathfile){
 
          // Video local path
@@ -367,5 +369,20 @@ class VideoController extends Controller
     
          return $detectedDuration;
     }
+
+    public function videoTag($tag){
+
+        $tags = Tag::all();
+        $tag = Tag::where('id', $tag)->first();
+        
+        $videos = Video::where('tag_id',$tag->id)->orderBy('id', 'desc')->get()->take(56);
+      
+       
+        
+
+        return view('front.tag.tag', compact('videos', 'tags','tag'));
+   }
+
+    
   
 }

@@ -131,13 +131,17 @@
                             <!-- start Payement --->
                             <h3 class="mt-5">Payement Type</h3>
                             <div class="GAPay">
+                                <span>Veuillez cocher le moyen de payemnt</span>
                                 <div class="pType field radios">
                                     <br>
                                     <input type="checkbox" name="payement" value="paypal" id="" required
                                         data-error-required="Select payment type">
-                                    <label for="" class="pType3"><span>PayPal</span>
-                                        <img
-                                            src="https://africancasting.com/t1/assets/epoch/img/payment-image-24.png"></label>
+                                    <label for="" class="pType3">
+                                        <img src="{{ asset('assets/img/paypal.png') }}">
+                                    </label>
+                                    <label for="" class="pType3">
+                                        <img src="{{ asset('assets/img/visa.png') }}">
+                                    </label>
                                     <br>
 
                                 </div>

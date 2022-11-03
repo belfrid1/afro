@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,11 +21,12 @@ class PaymentController extends Controller
         $this->gateway->setTestMode(true);
     }
 
-    public function pay($data){
+    public function pay(Request $request){
+        dd($request);
         try {
             $response = $this->gateway->purchase(array(
 //                'amount' => $data['amount'],
-                'amount' => $data['amount'],
+                'amount' => $request->amount,
                 'currency' => env('PAYPAL_CURRENCY'),
                 'returnUrl' => url('success'),
                 'cancelUrl' => url('error')
@@ -67,20 +69,25 @@ class PaymentController extends Controller
                 // 16.66 for 6 month 19.98 for 3 month 29.25 for 1 month
                 $today = Carbon::today();
                 // for 1 month
-                if($request->amount == 29.25){
-                    $periodeSubscription = Carbon::parse($today)->addDays(30) ;
+                if($request->amount == 29.25 || $request->amount == 19.98 ||  $request->amount == 16.66 ){
+                    if($request->amount == 29.25){
+                        $periodeSubscription = Carbon::parse($today)->addDays(30) ;
+                    }
+                    // 3 moonth
+                    if($request->amount == 19.98){
+    
+                        $periodeSubscription = Carbon::parse($today)->addDays(90) ;
+                    }
+                    // 6 moonth
+                    if($request->amount == 16.66){
+                        $periodeSubscription = Carbon::parse($today)->addDays(180) ;
+    
+                    }
+    
+                }else{
+                    return redirect();
                 }
-                // 3 moonth
-                if($request->amount == 19.98){
-
-                    $periodeSubscription = Carbon::parse($today)->addDays(90) ;
-                }
-                // 6 moonth
-                if($request->amount == 16.66){
-                    $periodeSubscription = Carbon::parse($today)->addDays(180) ;
-
-                }
-
+                
                 $end_subscription_date = $today + $periodeSubscription;
                 return User::create([
                     'name' => $request->name,
