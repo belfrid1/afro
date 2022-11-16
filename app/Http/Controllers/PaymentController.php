@@ -22,7 +22,6 @@ class PaymentController extends Controller
     }
 
     public function pay(Request $request){
-        dd($request);
         try {
             $response = $this->gateway->purchase(array(
 //                'amount' => $data['amount'],
